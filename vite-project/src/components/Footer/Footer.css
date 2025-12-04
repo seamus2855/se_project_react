@@ -1,0 +1,19 @@
+.wtwr-footer {
+  background-color: #f8f9fa;
+  color: #555;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #e7e7e7;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.copyright {
+  margin-top: 15px;
+  font-size: 0.8em;
+  color: #888;
+}
