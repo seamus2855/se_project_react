@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import { getWeather, filterweatherData } from "../../utils/weatherApi";
+import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
-  const [weatherData, setweatherData] = useState({ type: "cold" });
+  const [weatherData, setWeatherData] = useState({
+    type: "cold",
+    temp: { F: 999 },
+    city: "",
+  });
   const [activeModal, setActiveModal] = useState("preview");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -25,10 +30,23 @@ function App() {
     setActiveModal("");
   };
 
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterweatherData(data);
+        setWeatherData(filteredData);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} setweatherData={setweatherData} />
+        <Header
+          handleAddClick={handleAddClick}
+          setweatherData={setWeatherData}
+          weatherData={weatherData}
+        />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
       </div>
       <ModalWithForm
@@ -57,18 +75,25 @@ function App() {
         </label>
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend">Select weather type:</legend>
-          <input id="cold" className="modal__label modal__label_type_radio">
-            <input type="radio" className="modal__radio-input" /> Hot
-          </input>
-          <input id="cold" className="modal__label modal__label_type_radio">
-            <input type="radio" className="modal__radio-input" /> Warm
-          </input>
-          <input id="cold" className="modal__label modal__label_type_radio">
-            <input type="radio" className="modal__radio-input" /> Cold
-          </input>
+          <label className="modal__label modal__label_type_radio">
+            <input type="radio" className="modal__radio-input" value="hot" />{" "}
+            Hot
+          </label>
+          <label className="modal__label modal__label_type_radio">
+            <input type="radio" className="modal__radio-input" value="warm" />{" "}
+            Warm
+          </label>
+          <label className="modal__label modal__label_type_radio">
+            <input type="radio" className="modal__radio-input" value="cold" />{" "}
+            Cold
+          </label>
         </fieldset>
       </ModalWithForm>
-      <ItemModal activeModal={activeModal} card={selectedCard} onClose={closeActiveModal} />
+      <ItemModal
+        activeModal={activeModal}
+        card={selectedCard}
+        onClose={closeActiveModal}
+      />
     </div>
   );
 }
