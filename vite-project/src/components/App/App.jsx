@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
-import Main from "../Main/Main";
+import Main from "../../main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterweatherData } from "../../utils/weatherApi";
