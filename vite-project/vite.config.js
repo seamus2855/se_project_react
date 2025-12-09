@@ -1,10 +1,9 @@
- import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-    export default defineConfig({
-      root: './', // Or 'src' if your entire project root is within src
-      build: {
-        rollupOptions: {
-          input: 'src/index.html', // If index.html is inside src
-        },
-      },
-    });
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+  },
+});
