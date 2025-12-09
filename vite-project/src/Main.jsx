@@ -1,7 +1,7 @@
 import "./Main.css";
 import WeatherCard from "./WeatherCard/WeatherCard";
 import ItemCard from "../vite-project/src/ItemCard/ItemCard";
-import { defaultClothingItems } from "../../src/utils/constants";
+import { defaultClothingItems } from "./utils/constants";
 
 function Main({ weatherData, handleCardClick }) {
   return (
@@ -22,7 +22,8 @@ function Main({ weatherData, handleCardClick }) {
                 item={item}
                 onCardClick={handleCardClick}
               />
-            ))};
+            ))}
+          ;
         </ul>
       </section>
     </main>
