@@ -3,9 +3,11 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../vite-project/src/ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/constants";
 import App from "./App.jsx";
+
 function Main({ weatherData, handleCardClick }) {
   return (
     <main>
+      <App >
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
@@ -26,6 +28,7 @@ function Main({ weatherData, handleCardClick }) {
           ;
         </ul>
       </section>
+      </App>
     </main>
   );
 }
