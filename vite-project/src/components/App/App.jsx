@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "./App.css";
+import "..App";
 import Header from "../../Header/Header";
 import Main from "../vite-project/src/main";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
