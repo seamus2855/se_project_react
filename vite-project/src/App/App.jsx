@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
-import Header from "../vite-project/src/components/Header/Header";
+import Header from "../Header/Header";
 import Main from "../vite-project/src/main";
-import ModalWithForm from "../vite-project/src/components/ModalWithForm/ModalWithForm";
-import ItemModal from "../vite-project/src/components/ItemModal/ItemModal";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterweatherData } from "../vite-project/src/utils/weatherApi";
 import { coordinates, APIkey } from "../vite-project/src/utils/constants";
 
