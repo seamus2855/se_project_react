@@ -2,7 +2,7 @@ import "./WeatherCard.css";
 import {
   weatherOptions,
   defaultWeatherOptions,
-} from "../../../../src/utils/utils/constants";
+} from "../../../utils/utils/constants";
 
 function WeatherCard() {
   const filteredOptions = weatherOptions.filter((option) => {

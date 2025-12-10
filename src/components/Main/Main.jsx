@@ -1,8 +1,8 @@
 import "./Main.css";
-import WeatherCard from "../WeatherCard/WeatherCard";
+import WeatherCard from "../../../vite-project/src/components/WeatherCard/WeatherCard.jsx";
 import ItemCard from "../vite-project/src/ItemCard/ItemCard";
-import { defaultClothingItems } from "../../../../src/utils/utils/constants.js";
-import App from "./App.jsx";
+import { defaultClothingItems } from "../../utils/utils/constants.js";
+import App from './components/App.js'
 
 function Main({ weatherData, handleCardClick }) {
   return (
