@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 
-import "../App.css";
-import Header from "../../Header/Header";
-import Main from "../vite-project/src/main";
-import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import ItemModal from "../../ItemModal/ItemModal";
-import {
-  getWeather,
-  filterweatherData,
-} from "../vite-project/src/utils/weatherApi";
-import { coordinates, APIkey } from "../vite-project/src/utils/constants";
+import "./App.css";
+import Header from "../Header/Header";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
+import Main from "../Main/Main";
+import { getWeather } from "../../utils/weatherApi";
+import { coordinates, APIkey } from "../../utils/constants";
+import { filterweatherData } from "../../utils/weatherApi";
+import Footer from "../Footer/Footer";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -51,11 +50,10 @@ function App() {
           weatherData={weatherData}
         />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Footer />
       </div>
       <ModalWithForm
-        title="New garment"
-        buttonText="Add garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
@@ -65,12 +63,13 @@ function App() {
             className="modal__input"
             id="name"
             placeholder="Name"
+            required
           />
         </label>
         <label htmlFor="imageUrl" className="modal__label">
           Image{" "}
           <input
-            type="text"
+            type="url"
             className="modal__input"
             id="imageUrl"
             placeholder="Image URL"
@@ -78,11 +77,14 @@ function App() {
         </label>
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend">Select weather type:</legend>
-          <label className="modal__label modal__label_type_radio">
-            <input type="radio" className="modal__radio-input" value="hot" />{" "}
+          <label htmlFor="hot" className="modal__label modal__label_type_radio">
+            <input type="radio" name="weather" id="hot" value="hot" />
             Hot
           </label>
-          <label className="modal__label modal__label_type_radio">
+          <label
+            htmlFor="warm"
+            className="modal__label modal__label_type_radio"
+          >
             <input type="radio" className="modal__radio-input" value="warm" />{" "}
             Warm
           </label>

@@ -8,6 +8,17 @@ const Footer = () => {
   useEffect(() => {
     const fetchWeather = async () => {
       // Simulate fetching from a weather API
+      const randomTemp = Math.random() * 100;
+      const condition = randomTemp > 70 ? "sunny" : "cold";
+      setWeather(condition);
+      // ... more weather logic
+    };
+    fetchWeather();
+  }, []);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      // Simulate fetching from a weather API
       const randomTemp = Math.random() * 100; // 0-100 degrees
       const condition = randomTemp > 70 ? "sunny" : "cold";
       setWeather(condition);

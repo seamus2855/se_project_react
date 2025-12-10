@@ -1,13 +1,11 @@
 import "./WeatherCard.css";
-import {
-  weatherOptions,
-  defaultWeatherOptions,
-} from "../../../utils/utils/constants";
+import { weatherOptions, defaultWeatherOptions } from "../../utils/constants";
 
-function WeatherCard() {
+function WeatherCard({ weatherData }) {
+  // ← Now accepting the prop!
   const filteredOptions = weatherOptions.filter((option) => {
     return (
-      option.day === weatherData.isDay &&
+      option.day === weatherData.isDay && // ← Now this will work
       option.condition === weatherData.condition
     );
   });
@@ -25,9 +23,9 @@ function WeatherCard() {
 
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">(weatherData.temp.F) &deg: F</p>
-      <img
-        src="weatherOptionUrl"
+      <p className="weather-card__temp">{Math.round(weatherData.temp.F)}&deg;F</p>
+      <img 
+        src={weatherOptionUrl} 
         alt={`Card showing ${weatherOptionCondition} weather`}
         className="weather-card__image"
       />

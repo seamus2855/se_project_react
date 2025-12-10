@@ -1,18 +1,11 @@
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #0000004d;
-  opacity: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  opacity: 0;
   visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
 .modal__opened {
+  opacity: 1;
   visibility: visible;
 }
 
