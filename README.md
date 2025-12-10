@@ -7,5 +7,4 @@ The idea of the application is pretty simple - we make a call to an API, which t
 ## Links
 
 https://github.com/seamus2855/se_project_react
-
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
