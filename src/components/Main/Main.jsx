@@ -2,7 +2,7 @@ import "./Main.css";
 import WeatherCard from "../../../vite-project/src/components/WeatherCard/WeatherCard.jsx";
 import ItemCard from "../vite-project/src/ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/utils/constants.js";
-import App from './components/App.js'
+import App from "./components/App.jsx";
 
 function Main({ weatherData, handleCardClick }) {
   return (
