@@ -14,18 +14,23 @@ function WeatherCard({ weatherData }) {
   let weatherOptionCondition;
 
   if (filteredOptions.length === 0) {
-    weatherOptionUrl = defaultWeatherOptions?.url;
-    weatherOptionCondition = defaultWeatherOptions?.condition;
+    const defaultOption = weatherData.isDay
+      ? defaultWeatherOptions.day
+      : defaultWeatherOptions.night;
+    weatherOptionUrl = defaultOption?.url?.href;
+    weatherOptionCondition = "default";
   } else {
-    weatherOptionUrl = filteredOptions[0]?.url;
+    weatherOptionUrl = filteredOptions[0]?.url?.href;
     weatherOptionCondition = filteredOptions[0]?.condition;
   }
 
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">{Math.round(weatherData.temp.F)}&deg;F</p>
-      <img 
-        src={weatherOptionUrl} 
+      <p className="weather-card__temp">
+        {Math.round(weatherData.temp.F)}&deg;F
+      </p>
+      <img
+        src={weatherOptionUrl}
         alt={`Card showing ${weatherOptionCondition} weather`}
         className="weather-card__image"
       />

@@ -7,7 +7,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import Main from "../Main/Main";
 import { getWeather } from "../../utils/weatherApi";
 import { coordinates, APIkey } from "../../utils/constants";
-import { filterweatherData } from "../../utils/weatherApi";
+import { filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        const filteredData = filterweatherData(data);
+        const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
       .catch(console.error);
