@@ -7,58 +7,58 @@ export const weatherOptions = [
   {
     day: true,
     condition: "cloudy",
-    url: new URL("../assets/day/cloudyday.svg", import.meta.url.href),
+    url: new URL("../assets/day/cloudyday.svg", import.meta.url),
   },
 
   {
     day: true,
     condition: "rain",
-    url: new URL("../assets/day/rainday.svg", import.meta.url.href),
+    url: new URL("../assets/day/rainday.svg", import.meta.url),
   },
   {
     day: true,
     condition: "snow",
-    url: new URL("../assets/day/snowday.svg", import.meta.url.href),
+    url: new URL("../assets/day/snowday.svg", import.meta.url),
   },
   {
     day: true,
     condition: "storm",
-    url: new URL("../assets/day/stormday.svg", import.meta.url.href),
+    url: new URL("../assets/day/stormday.svg", import.meta.url),
   },
   {
     day: true,
     condition: "Fog",
-    url: new URL("../assets/day/fogday.svg", import.meta.url.href),
+    url: new URL("../assets/day/fogday.svg", import.meta.url),
   },
   {
     day: false,
     condition: "clear",
-    url: new URL("../assets/night/clearnight.svg", import.meta.url.href),
+    url: new URL("../assets/night/clearnight.svg", import.meta.url),
   },
   {
     day: false,
     condition: "cloudy",
-    url: new URL("../assets/night/cloudynight.svg", import.meta.url.href),
+    url: new URL("../assets/night/cloudynight.svg", import.meta.url),
   },
   {
     day: false,
     condition: "rain",
-    url: new URL("../assets/night/rainnight.svg", import.meta.url.href),
+    url: new URL("../assets/night/rainnight.svg", import.meta.url),
   },
   {
     day: false,
     condition: "snow",
-    url: new URL("../assets/night/snownight.svg", import.meta.url.href),
+    url: new URL("../assets/night/snownight.svg", import.meta.url),
   },
   {
     day: false,
     condition: "storm",
-    url: new URL("../assets/night/stormnight.svg", import.meta.url.href),
+    url: new URL("../assets/night/stormnight.svg", import.meta.url),
   },
   {
     day: false,
     condition: "Fog",
-    url: new URL("../assets/night/fognight.svg", import.meta.url.href),
+    url: new URL("../assets/night/fognight.svg", import.meta.url),
   },
 ];
 
