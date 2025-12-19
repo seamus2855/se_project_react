@@ -6,7 +6,11 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import Main from "../Main/Main";
 import { getWeather } from "../../utils/weatherApi";
-import { coordinates, APIkey } from "../../utils/constants";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants";
 import { filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 
@@ -16,8 +20,14 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("preview");
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  <Main
+    weatherData={weatherData}
+    clothingItems={clothingItems}
+    onCardClick={handleCardClick}
+  />;
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
