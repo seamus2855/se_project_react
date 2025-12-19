@@ -9,7 +9,6 @@ export const weatherOptions = [
     condition: "cloudy",
     url: new URL("../assets/day/cloudyday.svg", import.meta.url),
   },
-
   {
     day: true,
     condition: "rain",
@@ -27,7 +26,7 @@ export const weatherOptions = [
   },
   {
     day: true,
-    condition: "Fog",
+    condition: "fog",  // Fixed: lowercase
     url: new URL("../assets/day/fogday.svg", import.meta.url),
   },
   {
@@ -57,7 +56,7 @@ export const weatherOptions = [
   },
   {
     day: false,
-    condition: "Fog",
+    condition: "fog",  // Fixed: lowercase
     url: new URL("../assets/night/fognight.svg", import.meta.url),
   },
 ];
@@ -175,4 +174,6 @@ export const coordinates = {
   longitude: -74.9722,
 };
 
-export const APIkey = "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6";
+// IMPORTANT: Replace this with your actual OpenWeatherMap API key
+// Get one free at: https://openweathermap.org/api
+export const APIkey = "your-actual-api-key-here";
