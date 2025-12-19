@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Footer.css";
 
 const Footer = () => {
   const [weather, setWeather] = useState("unknown");
