@@ -1,22 +1,24 @@
-import "./Main.css";
-import WeatherCard from '../WeatherCard/WeatherCard';
-import { /* constants */ } from '../../utils/constants';
-
-function Main({ weatherData }) {
+function Main({ weatherData, clothingItems, onCardClick }) {
+  // Determine weather type
+  const temp = weatherData.temp.F;
+  const weatherType = temp >= 86 ? "hot" : temp >= 66 ? "warm" : "cold";
+  
+  // Filter items by weather
+  const filteredItems = clothingItems.filter(item => item.weather === weatherType);
+  
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.temp.F}&deg;F / You may want to wear:
-          setClothingItems([...clothingItems, newItem])
+          Today is {temp}&deg;F / You may want to wear:
         </p>
         <ul className="cards__list">
-          {/* Render clothing items here */}
+          {filteredItems.map((item) => (
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          ))}
         </ul>
       </section>
     </main>
   );
 }
-
-export default Main;
