@@ -21,6 +21,12 @@ const [weatherData, setWeatherData] = useState({
   city: "",
 });
 
+<Main 
+  weatherData={weatherData} 
+  clothingItems={clothingItems}
+  onCardClick={handleCardClick} 
+/>
+
 const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
 const [activeModal, setActiveModal] = useState("");
