@@ -1,46 +1,103 @@
+/* Modal Overlay */
 .modal {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
 }
 
-.modal__opened {
-  opacity: 1;
-  visibility: visible;
+.modal_opened {
+  display: flex;
 }
 
+/* Modal Content Box */
+.modal__content {
+  background-color: #fff;
+  border-radius: 16px;
+  max-width: 496px;
+  width: 100%;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal Title */
 .modal__title {
-  margin: 0;
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1.2;
 }
 
+/* Close Button */
 .modal__close {
   position: absolute;
   top: 20px;
-  right: 28px;
+  right: 20px;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  color: #000;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
 }
 
-.modal__content {
-  background-color: #fff;
-  position: relative;
-  padding: 28px 28px 36px;
-  max-width: 496px;
-  box-sizing: border-box;
-  width: 100%;
+.modal__close:hover {
+  opacity: 1;
 }
 
+/* Form */
 .modal__form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 16px;
 }
 
-.modal__input {
-  display: block;
-}
-
-.modal__radio-buttons {
+/* Submit Button */
+.modal__submit {
+  margin-top: 8px;
+  padding: 12px 24px;
+  background-color: #000;
+  color: #fff;
   border: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal__submit:hover {
+  background-color: #333;
+}
+
+.modal__submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .modal__content {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .modal__title {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
 }
