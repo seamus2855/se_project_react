@@ -22,3 +22,5 @@ function Main({ weatherData, clothingItems, onCardClick }) {
     </main>
   );
 }
+
+export default Main;
