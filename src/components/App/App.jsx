@@ -15,22 +15,19 @@ import { filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({
-    type: "cold",
-    temp: { F: 999 },
-    city: "",
-  });
-  const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
-  <Main
-    weatherData={weatherData}
-    clothingItems={clothingItems}
-    onCardClick={handleCardClick}
-  />;
+const [weatherData, setWeatherData] = useState({
+  type: "cold",
+  temp: { F: 999 },
+  city: "",
+});
 
-  const handleCardClick = (card) => {
-    setActiveModal("");
+const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+
+const [activeModal, setActiveModal] = useState("");
+const [selectedCard, setSelectedCard] = useState({});
+
+const handleCardClick = (card) => {
+    setActiveModal("preview");
     setSelectedCard(card);
   };
 
