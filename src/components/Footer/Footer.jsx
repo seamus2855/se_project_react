@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import "./Footer.css";
 
+function Footer() {
+  return (
+    <footer className="footer">
+      <p className="footer__text">Developed by [ Seamus Ryan]</p>
+      <p className="footer__year">2025</p>
+    </footer>
+  );
+}
+
 const Footer = () => {
   const [weather, setWeather] = useState("unknown");
   const [suggestion, setSuggestion] = useState("Just wing it.");
