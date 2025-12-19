@@ -30,7 +30,7 @@ function App() {
   />;
 
   const handleCardClick = (card) => {
-    setActiveModal("preview");
+    setActiveModal("");
     setSelectedCard(card);
   };
 
