@@ -1,4 +1,5 @@
 import "./ItemModal.css";
+import React, { useEffect } from 'react';
 
 function ItemModal({ activeModal, onClose, card }) {
   // Close modal when clicking outside (on overlay)
