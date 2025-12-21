@@ -1,6 +1,6 @@
 export const getWeather = ({ latitude, longitude }, aPIkey) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${aPIkey}`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=5b4a94ffae2a620ea252a283fd180f70`
   ).then((res) => {
     if (res.ok) {
       return res.json();
