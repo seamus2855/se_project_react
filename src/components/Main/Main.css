@@ -1,11 +1,13 @@
 .cards__list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style-type: none;
-  gap: 21px;
+  gap: 20px;
   justify-content: flex-start; /* Align to left */
+  
 }
 
 @media screen and (max-width: 768px) {
