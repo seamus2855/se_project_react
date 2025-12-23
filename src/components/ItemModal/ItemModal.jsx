@@ -32,7 +32,7 @@ function ItemModal({ activeModal, onClose, card }) {
 
   return (
     <div className="modal" onClick={handleOverlayClick}>
-      <div className="modal__content">
+      <div className="modal__content_type_image">
         <button
           className="modal__close"
           type="button"
