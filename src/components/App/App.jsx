@@ -87,7 +87,7 @@ function App() {
             placeholder="Image URL"
           />
         </label>
-        <fieldset className="modal__radio-buttons">
+        <fieldset className="modal__radio-image-buttons">
           <legend className="modal__legend">Select weather type:</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
             <input type="radio" name="weather" id="hot" value="hot" />
