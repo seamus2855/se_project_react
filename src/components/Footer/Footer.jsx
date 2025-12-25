@@ -7,36 +7,42 @@ const Footer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const loadWeather = async (latitude, longitude) => {
+      const response = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&temperature_unit=fahrenheit`
+      );
+
+      const data = await response.json();
+
+      // Safety check to avoid crashes
+      if (!data.current) {
+        setWeather("Weather unavailable");
+        setSuggestion("Check the weather app!");
+        setLoading(false);
+        return;
+      }
+
+      const temp = Math.round(data.current.temperature_2m);
+      const weatherCode = data.current.weather_code;
+
+      const weatherDesc = getWeatherDescription(weatherCode);
+      setWeather(`${temp}°F, ${weatherDesc}`);
+
+      setSuggestion(getWeatherSuggestion(weatherCode, temp));
+      setLoading(false);
+    };
+
     const fetchWeather = async () => {
       try {
-        // Get user's location
         const position = await new Promise((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
 
         const { latitude, longitude } = position.coords;
-
-        // Fetch weather data from Open-Meteo (free, no API key needed)
-        const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&temperature_unit=fahrenheit`
-        );
-
-        const data = await response.json();
-        const temp = Math.round(data.current.temperature_2m);
-        const weatherCode = data.current.weather_code;
-
-        // Map weather codes to descriptions
-        const weatherDesc = getWeatherDescription(weatherCode);
-        setWeather(`${temp}°F, ${weatherDesc}`);
-
-        // Set suggestion based on weather
-        setSuggestion(getWeatherSuggestion(weatherCode, temp));
-        setLoading(false);
+        await loadWeather(latitude, longitude);
       } catch (error) {
-        console.error("Error fetching weather:", error);
-        setWeather("Unable to fetch weather");
-        setSuggestion("Check the weather app!");
-        setLoading(false);
+        console.warn("Geolocation failed, using fallback location");
+        await loadWeather(40.201, -75.117); // Northampton, PA
       }
     };
 
