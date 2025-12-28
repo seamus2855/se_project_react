@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 import { useEffect, useState } from "react";
 
@@ -65,7 +65,7 @@ function App() {
       <div className="page__content">
         <Header
           handleAddClick={handleAddClick}
-          setweatherData={setWeatherData}
+          setWeatherData={setWeatherData}   // ← FIXED
           weatherData={weatherData}
         />
 
@@ -76,7 +76,7 @@ function App() {
           setClothingItems={setClothingItems}
         />
 
-        <Footer />
+        <Footer weatherData={weatherData} />
       </div>
 
       <ModalWithForm
