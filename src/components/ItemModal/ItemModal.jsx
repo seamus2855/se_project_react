@@ -1,6 +1,5 @@
 import React from "react";
 import "./ItemModal.css";
-import closeIcon from "../../assets/close.svg";
 
 function ItemModal({ activeModal, onClose, card }) {
   // Only render when preview modal is active
@@ -19,7 +18,7 @@ function ItemModal({ activeModal, onClose, card }) {
           onClick={onClose}
           aria-label="Close"
         >
-          <img src={closeIcon} alt="Close" />
+          ×
         </button>
 
         <img
