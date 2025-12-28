@@ -23,7 +23,6 @@ function App() {
   });
 
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
-
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -65,7 +64,7 @@ function App() {
       <div className="page__content">
         <Header
           handleAddClick={handleAddClick}
-          setWeatherData={setWeatherData}   // ← FIXED
+          setWeatherData={setWeatherData}
           weatherData={weatherData}
         />
 
@@ -73,7 +72,6 @@ function App() {
           weatherData={weatherData}
           onCardClick={handleCardClick}
           clothingItems={clothingItems}
-          setClothingItems={setClothingItems}
         />
 
         <Footer weatherData={weatherData} />

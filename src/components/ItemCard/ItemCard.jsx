@@ -1,27 +1,19 @@
-
+import React from "react";
 import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick }) {
-  const handleCardClick = () => {
+  const handleClick = () => {
     onCardClick(item);
   };
 
   return (
-    <li className="card" onClick={handleCardClick}>
+    <li className="item-card" onClick={handleClick}>
       <img
-        className="card__image"
-        src={item.link || item.imageUrl}
+        src={item.imageUrl}
         alt={item.name}
+        className="item-card__image"
       />
-      <div className="card__content">
-        <h2 className="card__name">{item.name}</h2>
-        {item.weather && (
-          <p className="card__weather">{item.weather}</p>
-        )}
-        {item.description && (
-          <p className="card__description">{item.description}</p>
-        )}
-      </div>
+      <p className="item-card__name">{item.name}</p>
     </li>
   );
 }
