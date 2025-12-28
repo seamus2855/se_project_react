@@ -1,9 +1,14 @@
 .page {
   background-color: #f3f3f3;
+  min-height: 100vh;        /* Ensures background covers full screen */
+  display: flex;
+  flex-direction: column;   /* Allows header → content → footer layout */
 }
 
 .page__content {
   max-width: 1360px;
+  width: 100%;              /* Prevents shrinking on small screens */
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;   /* Ensures padding doesn’t break layout */
 }

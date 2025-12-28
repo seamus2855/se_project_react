@@ -11,6 +11,7 @@
   flex-direction: column;
   max-width: 328px;
   width: 100%;
+  box-sizing: border-box; /* Prevents overflow issues */
 }
 
 .card:hover {
@@ -24,6 +25,7 @@
   height: 328px;
   object-fit: cover;
   display: block;
+  background-color: #f0f0f0; /* Prevents white flash while loading */
 }
 
 /* Card Content */
@@ -32,6 +34,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-sizing: border-box;
 }
 
 /* Card Name/Title */
@@ -41,6 +44,7 @@
   font-weight: 700;
   color: #000;
   line-height: 1.2;
+  word-break: break-word; /* Prevents long names from breaking layout */
 }
 
 /* Card Weather Info */
@@ -64,15 +68,15 @@
   .card {
     max-width: 100%;
   }
-  
+
   .card__image {
     height: 250px;
   }
-  
+
   .card__content {
     padding: 12px 16px;
   }
-  
+
   .card__name {
     font-size: 16px;
   }

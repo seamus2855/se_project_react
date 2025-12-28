@@ -1,23 +1,35 @@
+/* Weather Card Container */
 .weather-card {
   position: relative;
   display: flex;
   height: 80px;
   border-radius: 12px;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box; /* Prevents layout overflow */
+  background-color: #d0d0d0; /* Fallback if image fails to load */
 }
 
+/* Temperature Text */
 .weather-card__temp {
-  font-size: 36px;
-  line-height: 40px;
-  margin: 0;
   position: absolute;
   top: 20px;
   left: 16px;
-  color: white;
+  margin: 0;
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Improves readability */
+  pointer-events: none; /* Prevents accidental clicks */
 }
 
+/* Weather Background Image */
 .weather-card__image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: right top;
-  width: 100%;
+  display: block;
+  user-select: none; /* Prevents accidental text/image selection */
 }

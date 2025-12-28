@@ -2,11 +2,13 @@
 .modal__footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;          /* Ensures vertical alignment */
   gap: 12px;
   padding: 16px 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
   border-radius: 0 0 12px 12px;
+  box-sizing: border-box;       /* Prevents overflow issues */
 }
 
 /* Base button style */
@@ -16,6 +18,8 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease, opacity 0.2s ease;
+  box-sizing: border-box;       /* Keeps sizing consistent */
+  font-family: inherit;         /* Matches modal typography */
 }
 
 /* Secondary button */
@@ -33,7 +37,7 @@
 .modal__footer-btn_type_primary {
   background: #007aff;
   border: none;
-  color: white;
+  color: #fff;
   font-weight: 500;
 }
 

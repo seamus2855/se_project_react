@@ -5,14 +5,23 @@
   text-align: center;
   border-top: 1px solid #e7e7e7;
   font-family: Arial, sans-serif;
+  width: 100%;
+  box-sizing: border-box; /* Prevents layout overflow */
 }
 
 .footer-content {
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 20px;         /* Adds breathing room on small screens */
+  box-sizing: border-box;
 }
 
-.copyright {
+.footer-content p {
+  margin: 0;               /* Removes inconsistent spacing between lines */
+}
+
+copyright {
+  display: block;          /* Ensures consistent spacing behavior */
   margin-top: 15px;
   font-size: 0.8em;
   color: #888;
