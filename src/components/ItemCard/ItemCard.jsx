@@ -6,10 +6,15 @@ function ItemCard({ item, onCardClick }) {
     onCardClick(item);
   };
 
+  // Support both formats:
+  // - item.imageUrl (your intended structure)
+  // - item.link (WTWR default data)
+  const imageSrc = item.imageUrl || item.link;
+
   return (
     <li className="item-card" onClick={handleClick}>
       <img
-        src={item.imageUrl}
+        src={imageSrc}
         alt={item.name}
         className="item-card__image"
       />

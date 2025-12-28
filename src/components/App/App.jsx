@@ -1,6 +1,5 @@
 import "./App.css";
 
-
 import { useEffect, useState } from "react";
 
 import Header from "../Header/Header";
@@ -19,27 +18,46 @@ import {
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "cold",
-    temp: { F: 999 },
+    temp: { F: "--" },
     city: "",
+    weatherImage: null,
   });
 
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
 
+  // Open preview modal
   const handleCardClick = (card) => {
-    setActiveModal("preview");
     setSelectedCard(card);
+    setActiveModal("preview");
   };
 
+  // Open add-garment modal
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
 
-  const closeActiveModal = () => {
-    setActiveModal("");
+  const handleAddItemSubmit = (name, imageUrl, weather) => {
+  const newItem = {
+    _id: Date.now(), // temporary unique ID
+    name,
+    weather,
+    imageUrl,
   };
 
+  setClothingItems((prev) => [newItem, ...prev]);
+  closeActiveModal();
+};
+
+
+  // Close any modal
+  const closeActiveModal = () => {
+    setActiveModal("");
+    setSelectedCard(null);
+  };
+
+  // Close modal on ESC
   useEffect(() => {
     if (!activeModal) return;
 
@@ -51,6 +69,7 @@ function App() {
     return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
+  // Fetch weather on mount
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -65,19 +84,19 @@ function App() {
       <div className="page__content">
         <Header
           handleAddClick={handleAddClick}
-          setWeatherData={setWeatherData}
           weatherData={weatherData}
         />
 
         <Main
           weatherData={weatherData}
-          onCardClick={handleCardClick}
           clothingItems={clothingItems}
+          onCardClick={handleCardClick}
         />
 
         <Footer weatherData={weatherData} />
       </div>
 
+      {/* Add Garment Modal */}
       <ModalWithForm
         title="New garment"
         buttonText="Add garment"
@@ -85,7 +104,7 @@ function App() {
         onClose={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label">
-          Name{" "}
+          Name
           <input
             type="text"
             className="modal__input"
@@ -96,7 +115,7 @@ function App() {
         </label>
 
         <label htmlFor="imageUrl" className="modal__label">
-          Image{" "}
+          Image
           <input
             type="url"
             className="modal__input"
@@ -125,6 +144,7 @@ function App() {
         </fieldset>
       </ModalWithForm>
 
+      {/* Preview Modal */}
       <ItemModal
         activeModal={activeModal}
         card={selectedCard}

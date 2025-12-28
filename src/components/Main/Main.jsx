@@ -5,7 +5,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData, clothingItems, onCardClick }) {
-  const temp = weatherData?.temp?.F;
+  const temp = weatherData?.temp?.F ?? "--";
 
   // Determine weather type based on temperature
   const weatherType =
@@ -40,3 +40,4 @@ function Main({ weatherData, clothingItems, onCardClick }) {
 }
 
 export default Main;
+
