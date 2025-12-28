@@ -16,10 +16,10 @@ function ItemModal({ activeModal, onClose, card }) {
       document.addEventListener("keydown", handleEscapeKey);
     }
 
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, [activeModal, onClose]);
+  return () => {
+    document.removeEventListener("keydown", handleEscapeKey);
+  };
+}, [activeModal, onClose]);
 
   if (activeModal !== "preview" || !card) return null;
 
