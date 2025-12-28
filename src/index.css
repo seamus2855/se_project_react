@@ -1,10 +1,2 @@
 @import "./components/Footer/Footer.css";
 @import "./components/Main/Main.css";
-
-@import './App.css';
-
-/* your other global styles */
-body {
-  margin: 0;
-  /* ... */
-}
