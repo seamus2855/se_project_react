@@ -1,15 +1,17 @@
-import WeatherCard from "../WeatherCard/WeatherCard";
-import ItemCard from "../ItemCard/ItemCard";
-import "./Main.css";
+import WeatherCard from "./components/WeatherCard/WeatherCard";
+import ItemCard from "./components/ItemCard/ItemCard";
+import "./components/Main/Main";
 
 function Main({ weatherData, clothingItems, onCardClick }) {
   // Determine weather type
   const temp = weatherData.temp.F;
   const weatherType = temp >= 86 ? "hot" : temp >= 66 ? "warm" : "cold";
-  
+
   // Filter items by weather
-  const filteredItems = clothingItems.filter(item => item.weather === weatherType);
-  
+  const filteredItems = clothingItems.filter(
+    (item) => item.weather === weatherType
+  );
+
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
