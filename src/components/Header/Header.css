@@ -1,40 +1,58 @@
+/* Header container */
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensures clean spacing across the header */
+  justify-content: space-between;
   padding: 32px 0 28px;
   width: 100%;
-  box-sizing: border-box;         /* Prevents overflow issues */
+  box-sizing: border-box;
 }
 
-.header__logo {
-  margin-right: 24px;
-  display: flex;
-  align-items: center;            /* Keeps logo vertically aligned */
-}
-
-.header__date-and-location {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.2;
-}
-
-.header__add-clothes-btn {
-  margin-left: auto;              /* Cleaner than margin: 0 20px 0 auto */
-  margin-right: 20px;
-  border: none;
-  background: none;
-  cursor: pointer;                /* Makes it feel like a real button */
-  font-size: 16px;
-}
-
-.header__user-container {
+/* Inner content wrapper */
+.header__content {
   display: flex;
   align-items: center;
-  gap: 12px;
+  width: 100%;
+  gap: 24px;
 }
 
-.header__username {
+/* Logo */
+.header__logo {
+  font-size: 20px;
+  font-weight: 700;
   margin: 0;
+  white-space: nowrap;
+}
+
+/* Weather section */
+.header__weather {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   font-size: 16px;
+}
+
+.header__temp {
+  font-weight: 600;
+}
+
+.header__city {
+  color: #555;
+}
+
+/* Add garment button */
+.header__add-button {
+  margin-left: auto;
+  padding: 8px 14px;
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.header__add-button:hover {
+  background: #333;
 }
