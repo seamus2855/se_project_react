@@ -22,6 +22,9 @@ function Header({ handleAddClick, weatherData }) {
         >
           + Add garment
         </button>
+        <span className="header__date">
+          {new Date().toLocaleString('default', { month: 'long', day: 'numeric' })}
+        </span>
       </div>
     </header>
   );
