@@ -10,6 +10,18 @@ function Header({ handleAddClick, weatherData }) {
       <div className="header__content">
         <h1 className="header__logo">WTWR — What To Wear</h1>
 
+        <span className="header__date">
+          {new Date().toLocaleString("default", {
+            month: "long",
+            day: "numeric",
+          })}
+        </span>
+
+        <p className="header__username">Terrence Tegegne</p>
+
+        {/* Avatar */}
+        <div className="header__avatar">TT</div>
+
         <div className="header__weather">
           <span className="header__temp">{temp}°F</span>
           {city && <span className="header__city">in {city}</span>}
@@ -22,9 +34,6 @@ function Header({ handleAddClick, weatherData }) {
         >
           + Add garment
         </button>
-        <span className="header__date">
-          {new Date().toLocaleString('default', { month: 'long', day: 'numeric' })}
-        </span>
       </div>
     </header>
   );
