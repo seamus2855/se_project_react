@@ -70,3 +70,27 @@
 .header__add-button:hover {
   background: #333;
 }
+
+.header__weather-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-right: auto;
+}
+
+.header__date {
+  font-size: 14px;
+  color: #555;
+}
+
+.header__location {
+  font-size: 14px;
+  color: #777;
+}
+
+.header__temp-large {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+}
+
