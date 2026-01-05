@@ -1,4 +1,5 @@
 @import "./components/Footer/Footer.css";
 @import "./components/Main/Main.css";
 @import "./components/ItemModal/ItemModal.css";
-@import "./components/WeatherImage.css";
+@import "./components/WeatherImage/WeatherImage.css";
+

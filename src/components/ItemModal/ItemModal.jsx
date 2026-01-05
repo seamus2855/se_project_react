@@ -1,6 +1,6 @@
 import React from "react";
-import "./components/ItemModal/ItemModal.css";
-import "./components/WeatherImage.css";
+import "../ItemModal/ItemModal.css";
+import "../WeatherImage/WeatherImage.css";
 
 export default function ClothesModal({
   isOpen,
