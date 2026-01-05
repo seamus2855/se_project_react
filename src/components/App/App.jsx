@@ -28,6 +28,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleCardClick = (card) => {
+    console.log("Card clicked:", card);
     setSelectedCard(card);
     setActiveModal("preview");
   };

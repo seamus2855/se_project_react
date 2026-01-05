@@ -12,6 +12,7 @@
   max-width: 328px;
   width: 100%;
   box-sizing: border-box;
+  gap: 12px;
 }
 
 .item-card:hover {

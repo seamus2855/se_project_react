@@ -1,0 +1,13 @@
+.weather-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.weather-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 12px;
+}
