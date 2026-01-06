@@ -1,4 +1,6 @@
 import React from "react";
+import "./WeatherImage.css";  // This connects the CSS to this component
+
 
 export default function WeatherImage() {
   // Hardcoded fallback image — replace with your own asset
