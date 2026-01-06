@@ -77,10 +77,7 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header
-          handleAddClick={handleAddClick}
-          weatherData={weatherData}
-        />
+        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
 
         <Main
           weatherData={weatherData}
@@ -98,9 +95,54 @@ function App() {
         onClose={closeActiveModal}
         onSubmit={handleAddItemSubmit}
       />
+      <ModalWithForm
+        title="New garment"
+        buttonText="Add garment"
+        isOpen={activeModal === "add-garment"}
+        onClose={closeActiveModal}
+        onSubmit={handleAddItemSubmit}
+      >
+        <label htmlFor="name" className="modal__label">
+          Name
+          <input
+            type="text"
+            className="modal__input"
+            id="name"
+            placeholder="Name"
+            required
+          />
+        </label>
+
+        <label htmlFor="imageUrl" className="modal__label">
+          Image
+          <input
+            type="url"
+            className="modal__input"
+            id="imageUrl"
+            placeholder="Image URL"
+          />
+        </label>
+
+        <legend className="modal__legend">Select weather type:</legend>
+
+        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+          <input type="radio" name="weather" id="hot" value="hot" />
+          Hot
+        </label>
+
+        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+          <input type="radio" name="weather" id="warm" />
+          Warm
+        </label>
+
+        <label className="modal__label modal__label_type_radio">
+          <input type="radio" name="weather" id="cold" />
+          Cold
+        </label>
+      </ModalWithForm>
 
       <ItemModal
-        activeModal={activeModal}
+        isOpen={activeModal === "preview"} // this way
         card={selectedCard}
         onClose={closeActiveModal}
       />

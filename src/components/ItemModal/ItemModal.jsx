@@ -1,80 +1,30 @@
-import React from "react";
-import "../ItemModal/ItemModal.css";
-import "../WeatherImage/WeatherImage.css";
+import "./ItemModal.css";
 
-export default function ClothesModal({
-  isOpen,
-  onClose,
-  onSubmit,
-  formData,
-  setFormData,
-}) {
+function ItemModal({ isOpen, onClose, card }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-card">
-        <button className="modal-close" onClick={onClose}>
-          ✕
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+      <div className="modal__content modal__content_type_image">
+        <button
+          onClick={onClose}
+          type="button"
+          className="modal__close"
+          aria-label="Close modal"
+        >
+          {/* No text content needed - CSS handles the icon */}
         </button>
 
-        <h2 className="modal-title">Add Clothing Item</h2>
+        <img src={card.imageUrl} alt={card.name} className="modal__image" />
 
-        <form
-          className="modal-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            onSubmit();
-          }}
-        >
-          <label className="modal-label">
-            Name
-            <input
-              type="text"
-              className="modal-input"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              required
-            />
-          </label>
+        <div className="modal__footer">
+          <h2 className="modal__caption">{card.name}</h2>
 
-          <label className="modal-label">
-            Image URL
-            <input
-              type="url"
-              className="modal-input"
-              value={formData.imageUrl}
-              onChange={(e) =>
-                setFormData({ ...formData, imageUrl: e.target.value })
-              }
-              required
-            />
-          </label>
-
-          <label className="modal-label">
-            Weather Type
-            <select
-              className="modal-input"
-              value={formData.weather}
-              onChange={(e) =>
-                setFormData({ ...formData, weather: e.target.value })
-              }
-              required
-            >
-              <option value="">Select...</option>
-              <option value="hot">Hot</option>
-              <option value="warm">Warm</option>
-              <option value="cold">Cold</option>
-            </select>
-          </label>
-
-          <button className="modal-submit" type="submit">
-            Add Item
-          </button>
-        </form>
+          <p className="modal__weather">Weather: {card.weather}</p>
+        </div>
       </div>
     </div>
   );
 }
+
+export default ItemModal;
