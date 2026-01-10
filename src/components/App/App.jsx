@@ -86,7 +86,7 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{
         currentTemperatureUnit,
-        handleToggleSwitchChange: setCurrentTemperatureUnit,
+        handleToggleSwitchChange,
       }}
     >
       <div className="page">
