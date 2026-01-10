@@ -1,5 +1,7 @@
 import React from "react";
 import "./Header.css";
+import "..ToggleSwitch/ToggleSwitch";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddClick, weatherData }) {
   const temp = weatherData?.temp?.F ?? "--";
@@ -34,7 +36,8 @@ function Header({ handleAddClick, weatherData }) {
           className="header__add-button"
           onClick={handleAddClick}
         >
-          + Add garment
+          <ToggleSwitch/>
+          + Add Clothes
         </button>
       </div>
     </header>
