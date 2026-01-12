@@ -11,7 +11,7 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
   coordinates,
-  APIkey,
+  APIKEY,
 } from "../../utils/constants";
 
 import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
@@ -77,7 +77,7 @@ const handleAddItemSubmit = async (name, imageUrl, weather) => {
   }, [activeModal]);
 
   useEffect(() => {
-    getWeather(coordinates, APIkey)
+    getWeather(coordinates, APIKEY)
       .then((data) => {
         const filtered = filterWeatherData(data);
         setWeatherData(filtered);
