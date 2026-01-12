@@ -176,4 +176,4 @@ export const coordinates = {
 
 // IMPORTANT: Replace this with your actual OpenWeatherMap API key
 // Get one free at: https://openweathermap.org/api
-export const APIkey = "your-actual-api-key-here";
+export const APIKey = "your-actual-api-key-here";
