@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import SideBar from "../SideBar";
+import SideBar from "../Sidebar/Sidebar";
 
 function Profile({ clothingItems, onAddClick, onCardClick }) {
   return (
