@@ -37,13 +37,16 @@ function Header({ handleAddClick, weatherData }) {
           <div className="header__avatar">TT</div>
         </NavLink>
 
-        <button
-          type="button"
-          className="header__add-button"
-          onClick={handleAddClick}
-        >
-          <ToggleSwitch />+ Add Clothes
-        </button>
+        <div className="header__controls">
+          <ToggleSwitch />
+          <button
+            type="button"
+            className="header__add-button"
+            onClick={handleAddClick}
+          >
+            + Add Clothes
+          </button>
+        </div>
       </div>
     </header>
   );
