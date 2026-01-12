@@ -29,6 +29,14 @@ function Header({ handleAddClick, weatherData }) {
           <h1 className="header__logo">WTWR — What To Wear</h1>
         </NavLink>
 
+        <NavLink to="/profile" className="header__profile-link">
+          Profile
+        </NavLink>
+
+        <NavLink to="/profile" className="header__avatar-link">
+          <div className="header__avatar">TT</div>
+        </NavLink>
+
         <button
           type="button"
           className="header__add-button"
