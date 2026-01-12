@@ -120,14 +120,14 @@ const App = () => {
 
         <AddItemModal
           isOpen={activeModal === "add-garment"}
-          onClose={closeActiveModal}
+          onCloseModal={closeActiveModal}
           onAddItem={handleAddItemSubmit}
         />
 
         <ItemModal
           isOpen={activeModal === "preview"}
           card={selectedCard}
-          onClose={closeActiveModal}
+          onCloseModal={closeActiveModal}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
