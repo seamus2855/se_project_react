@@ -2,17 +2,22 @@ import React from "react";
 import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick }) {
+  if (!item) return null;
+
   const handleClick = () => {
     onCardClick(item);
   };
 
-  // Support both formats:
-  // - item.imageUrl (your intended structure)
-  // - item.link (WTWR default data)
   const imageSrc = item.imageUrl || item.link;
 
   return (
-    <li className="item-card" onClick={handleClick}>
+    <li
+      className="item-card"
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && handleClick()}
+    >
       <img
         src={imageSrc}
         alt={item.name}

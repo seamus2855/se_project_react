@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";  // keep this one
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { NavLink } from "react-router-dom";
 
 function Header({ handleAddClick, weatherData }) {
   const temp = weatherData?.temp?.F ?? "--";
@@ -23,7 +24,10 @@ function Header({ handleAddClick, weatherData }) {
         <h1 className="header__logo">WTWR — What To Wear</h1>
 
         <p className="header__username">Terrence Tegegne</p>
-        <div className="header__avatar">TT</div>
+
+        <NavLink to="/profile" className="header__avatar-link">
+          <div className="header__avatar">TT</div>
+        </NavLink>
 
         <button
           type="button"
