@@ -1,12 +1,12 @@
 import React from "react";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import Sidebar from "../Sidebar/Sidebar";
+import SideBar from "../SideBar";
 
 function Profile({ clothingItems, onAddClick, onCardClick }) {
   return (
     <section className="profile">
-      <Sidebar />
+      <SideBar />
       <ClothesSection
         clothingItems={clothingItems}
         onAddClick={onAddClick}

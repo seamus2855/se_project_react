@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import "./ToggleSwitch.css";
 import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
-import { transformWithEsbuild } from "vite";
 
 export default function ToggleSwitch() {
   const { handleToggleSwitchChange, currentTemperatureUnit } = useContext(

@@ -85,6 +85,21 @@ const handleAddItemSubmit = async (name, imageUrl, weather) => {
       .catch(console.error);
   }, []);
 
+  const handleDeleteItem = async (card) => {
+  try {
+    await removeCard(card._id); // DELETE request to server
+
+    setClothingItems((prev) =>
+      prev.filter((item) => item._id !== card._id)
+    );
+
+    closeActiveModal();
+  } catch (err) {
+    console.error("Failed to delete item:", err);
+  }
+};
+
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{

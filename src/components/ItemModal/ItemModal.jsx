@@ -17,6 +17,13 @@ function ItemModal({ isOpen, onClose, card }) {
 
         <img src={card.imageUrl} alt={card.name} className="modal__image" />
 
+        <ItemModal
+          isOpen={activeModal === "preview"}
+          card={selectedCard}
+          onCloseModal={closeActiveModal}
+          onDeleteItem={handleDeleteItem}
+        />
+
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
 
