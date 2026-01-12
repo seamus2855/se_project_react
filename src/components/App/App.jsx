@@ -15,7 +15,7 @@ import {
   defaultClothingItems,
 } from "../../utils/constants";
 
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({
@@ -91,30 +91,29 @@ const App = () => {
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
 
-<Routes>
-  <Route
-    path="/"
-    element={
-      <Main
-        weatherData={weatherData}
-        handleCardClick={handleCardClick}
-        clothingItems={clothingItems}
-      />
-    }
-  />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
 
-  <Route
-    path="/profile"
-    element={
-      <Profile
-        clothingItems={clothingItems}
-        onAddClick={handleAddClick}
-        onCardClick={handleCardClick}
-      />
-    }
-  />
-</Routes>
-
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  onAddClick={handleAddClick}
+                  onCardClick={handleCardClick}
+                />
+              }
+            />
+          </Routes>
 
           <Footer />
         </div>

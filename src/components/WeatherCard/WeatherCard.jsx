@@ -1,6 +1,6 @@
 import React from "react";
 import "./WeatherCard.css";
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
 import { weatherOptions } from "../../utils/constants";
 
 function WeatherCard({ weatherData }) {
@@ -23,11 +23,7 @@ function WeatherCard({ weatherData }) {
       </p>
 
       {weatherImage && (
-        <img
-          src={weatherImage}
-          alt={type}
-          className="weather-card__image"
-        />
+        <img src={weatherImage} alt={type} className="weather-card__image" />
       )}
     </section>
   );

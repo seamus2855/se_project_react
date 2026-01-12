@@ -9,3 +9,4 @@
 @import "./components/ToggleSwitch/ToggleSwitch.css";
 @import "./components/SideBar/SideBar.css";
 @import "./hooks/useForm.js";
+@import "./components/contexts/CurrentTemperatureUnitContext.jsx";
