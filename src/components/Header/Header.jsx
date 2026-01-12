@@ -25,8 +25,8 @@ function Header({ handleAddClick, weatherData }) {
 
         <p className="header__username">Terrence Tegegne</p>
 
-        <NavLink to="/profile" className="header__avatar-link">
-          <div className="header__avatar">TT</div>
+        <NavLink to="/" className="header__logo-link">
+          <h1 className="header__logo">WTWR — What To Wear</h1>
         </NavLink>
 
         <button
@@ -34,8 +34,7 @@ function Header({ handleAddClick, weatherData }) {
           className="header__add-button"
           onClick={handleAddClick}
         >
-          <ToggleSwitch />
-          + Add Clothes
+          <ToggleSwitch />+ Add Clothes
         </button>
       </div>
     </header>
