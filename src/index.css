@@ -8,3 +8,4 @@
 @import "./components/ModalWithForm/ModalWithForm.css";
 @import "./components/ToggleSwitch/ToggleSwitch.css";
 @import "./components/SideBar/SideBar.css";
+@import "./hooks/useForm.js";
