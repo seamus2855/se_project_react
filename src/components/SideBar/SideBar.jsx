@@ -1,5 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -10,9 +11,17 @@ function Sidebar() {
       </div>
 
       <nav className="sidebar__nav">
-        <button className="sidebar__nav-item">Profile</button>
-        <button className="sidebar__nav-item">Your Items</button>
-        <button className="sidebar__nav-item">Settings</button>
+        <NavLink to="/profile" className="sidebar__nav-item">
+          Profile
+        </NavLink>
+
+        <NavLink to="/" className="sidebar__nav-item">
+          Your Items
+        </NavLink>
+
+        <NavLink to="/settings" className="sidebar__nav-item">
+          Settings
+        </NavLink>
       </nav>
     </aside>
   );
