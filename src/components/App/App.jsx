@@ -12,7 +12,6 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import {
   coordinates,
   APIkey,
-  defaultClothingItems,
 } from "../../utils/constants";
 
 import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
@@ -48,17 +47,23 @@ const App = () => {
     setSelectedCard(null);
   };
 
-  const handleAddItemSubmit = (name, imageUrl, weather) => {
-    const newItem = {
-      _id: Date.now(),
-      name,
-      weather,
-      imageUrl,
-    };
+const handleAddItemSubmit = async (name, imageUrl, weather) => {
+  const item = { name, imageUrl, weather };
 
-    setClothingItems((prev) => [newItem, ...prev]);
+  try {
+    // 1. Send to server
+    const newItem = await postItem(item);
+
+    // 2. Update UI with server response
+    setClothingItems((prev) => [newItem, ...(prev || [])]);
+
+    // 3. Close modal
     closeActiveModal();
-  };
+  } catch (error) {
+    console.error("Failed to add item:", error);
+    // Optional: show error message to user
+  }
+};
 
   useEffect(() => {
     if (!activeModal) return;
