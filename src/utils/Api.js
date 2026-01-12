@@ -1,14 +1,11 @@
-export const addCard = async ({ name, link }) => {
+export const addCard = async ({ name, imageUrl }) => {
   try {
     const res = await fetch(`${baseUrl}/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name,
-        imageUrl: link,   // WTWR uses "link", your app uses "imageUrl"
-      }),
+      body: JSON.stringify({ name, imageUrl }),
     });
 
     if (!res.ok) {
@@ -35,10 +32,7 @@ export const removeCard = async (cardID) => {
       throw new Error(`Failed to delete item with status ${res.status}`);
     }
 
-    // If the server returns 204 No Content, don't try to parse JSON
-    if (res.status === 204) {
-      return;
-    }
+    if (res.status === 204) return;
 
     return await res.json();
   } catch (err) {
