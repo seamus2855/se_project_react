@@ -78,7 +78,7 @@ const handleAddItemSubmit = async (name, imageUrl, weather) => {
   }, [activeModal]);
 
   useEffect(() => {
-    getWeather(coordinates, APIKEY)
+    getWeather(coordinates, APIKey)
       .then((data) => {
         const filtered = filterWeatherData(data);
         setWeatherData(filtered);
