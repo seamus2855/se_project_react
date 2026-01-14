@@ -1,3 +1,9 @@
+const baseUrl = "http://localhost:3001";
+export const getItems = async () => {
+  // Make a GET request to fetch all items
+  // Return the array of clothing items
+};
+
 export const addCard = async ({ name, imageUrl }) => {
   try {
     const res = await fetch(`${baseUrl}/items`, {

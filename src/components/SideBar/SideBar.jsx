@@ -10,7 +10,7 @@ function Sidebar() {
         <p className="sidebar__username">Terrence Tegegne</p>
       </div>
 
-      <nav className="sidebar__nav">
+      <nav>
         <NavLink to="/profile" className="sidebar__nav-item">
           Profile
         </NavLink>

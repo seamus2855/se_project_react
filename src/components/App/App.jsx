@@ -8,14 +8,13 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import {
-  coordinates,
-  APIKey,
-} from "../../utils/constants";
+import { addCard } from "../utils/Api.js";
 
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import { coordinates, APIKey } from "../../utils/constants";
 
 import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
+import { getItems, postItem, removeCard } from "../../utils/Api";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({
@@ -27,7 +26,7 @@ const App = () => {
     isDay: true,
   });
 
-  const [clothingItems, setClothingItems] = useState();
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -48,23 +47,17 @@ const App = () => {
     setSelectedCard(null);
   };
 
-const handleAddItemSubmit = async (name, imageUrl, weather) => {
-  const item = { name, imageUrl, weather };
+  const handleAddItemSubmit = async (name, imageUrl, weather) => {
+    const item = { name, imageUrl, weather };
 
-  try {
-    // 1. Send to server
-    const newItem = await postItem(item);
-
-    // 2. Update UI with server response
-    setClothingItems((prev) => [newItem, ...(prev || [])]);
-
-    // 3. Close modal
-    closeActiveModal();
-  } catch (error) {
-    console.error("Failed to add item:", error);
-    // Optional: show error message to user
-  }
-};
+    try {
+      const newItem = await addCard(item); 
+      setClothingItems((prev) => [newItem, ...prev]);
+      closeActiveModal();
+    } catch (error) {
+      console.error("Failed to add item:", error);
+    }
+  };
 
   useEffect(() => {
     if (!activeModal) return;
@@ -77,6 +70,7 @@ const handleAddItemSubmit = async (name, imageUrl, weather) => {
     return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
+  // Load weather
   useEffect(() => {
     getWeather(coordinates, APIKey)
       .then((data) => {
@@ -86,20 +80,22 @@ const handleAddItemSubmit = async (name, imageUrl, weather) => {
       .catch(console.error);
   }, []);
 
+  // Load clothing items
+  useEffect(() => {
+    getItems()
+      .then((items) => setClothingItems(items))
+      .catch(console.error);
+  }, []);
+
   const handleDeleteItem = async (card) => {
-  try {
-    await removeCard(card._id); // DELETE request to server
-
-    setClothingItems((prev) =>
-      prev.filter((item) => item._id !== card._id)
-    );
-
-    closeActiveModal();
-  } catch (err) {
-    console.error("Failed to delete item:", err);
-  }
-};
-
+    try {
+      await removeCard(card._id);
+      setClothingItems((prev) => prev.filter((item) => item._id !== card._id));
+      closeActiveModal();
+    } catch (err) {
+      console.error("Failed to delete item:", err);
+    }
+  };
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -149,6 +145,7 @@ const handleAddItemSubmit = async (name, imageUrl, weather) => {
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onCloseModal={closeActiveModal}
+          onDeleteItem={handleDeleteItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
