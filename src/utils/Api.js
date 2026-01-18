@@ -1,7 +1,19 @@
 const baseUrl = "http://localhost:3001";
-export const getItems = async () => {
-  // Make a GET request to fetch all items
-  // Return the array of clothing items
+
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
+};
+
+export const getItems = () => {
+  return fetch(`${baseUrl}/items`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
 };
 
 export const addCard = async ({ name, imageUrl }) => {

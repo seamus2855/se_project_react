@@ -8,13 +8,11 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
-import { addCard } from "../utils/Api.js";
-
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 
 import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
-import { getItems, postItem, removeCard } from "../../utils/Api";
+import { getItems, addCard, removeCard } from "../../utils/Api";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({
@@ -51,7 +49,7 @@ const App = () => {
     const item = { name, imageUrl, weather };
 
     try {
-      const newItem = await addCard(item); 
+      const newItem = await addCard(item);
       setClothingItems((prev) => [newItem, ...prev]);
       closeActiveModal();
     } catch (error) {
@@ -114,7 +112,7 @@ const App = () => {
               element={
                 <Main
                   weatherData={weatherData}
-                  handleCardClick={handleCardClick}
+                  onCardClick={handleCardClick}
                   clothingItems={clothingItems}
                 />
               }
@@ -144,7 +142,7 @@ const App = () => {
         <ItemModal
           isOpen={activeModal === "preview"}
           card={selectedCard}
-          onCloseModal={closeActiveModal}
+          onClose={closeActiveModal}
           onDeleteItem={handleDeleteItem}
         />
       </div>

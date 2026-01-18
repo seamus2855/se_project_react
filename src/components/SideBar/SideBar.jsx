@@ -9,20 +9,6 @@ function Sidebar() {
         <div className="sidebar__avatar">TT</div>
         <p className="sidebar__username">Terrence Tegegne</p>
       </div>
-
-      <nav>
-        <NavLink to="/profile" className="sidebar__nav-item">
-          Profile
-        </NavLink>
-
-        <NavLink to="/" className="sidebar__nav-item">
-          Your Items
-        </NavLink>
-
-        <NavLink to="/settings" className="sidebar__nav-item">
-          Settings
-        </NavLink>
-      </nav>
     </aside>
   );
 }

@@ -18,19 +18,14 @@ function Header({ handleAddClick, weatherData }) {
         <div className="header__weather-header">
           <span className="header__date">{dateString}</span>
           <span className="header__location">in {city}</span>
-          <span className="header__temp-large">{temp}°F</span>
         </div>
-
-        <h1 className="header__logo">WTWR — What To Wear</h1>
-
-        <p className="header__username">Terrence Tegegne</p>
 
         <NavLink to="/" className="header__logo-link">
           <h1 className="header__logo">WTWR — What To Wear</h1>
         </NavLink>
 
         <NavLink to="/profile" className="header__profile-link">
-          Profile
+          Terrence Tegegne
         </NavLink>
 
         <NavLink to="/profile" className="header__avatar-link">

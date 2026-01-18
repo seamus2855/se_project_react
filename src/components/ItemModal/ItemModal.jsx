@@ -1,33 +1,34 @@
+import React from "react";
 import "./ItemModal.css";
 
-function ItemModal({ isOpen, onClose, card }) {
-  if (!isOpen) return null;
+function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
+  if (!isOpen || !card) return null;
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-      <div className="modal__content modal__content_type_image">
-        <button
-          onClick={onClose}
-          type="button"
-          className="modal__close"
-          aria-label="Close modal"
-        >
-          {/* No text content needed - CSS handles the icon */}
+    <div className="modal">
+      <div className="modal__content">
+
+        <button className="modal__close" onClick={onCloseModal}>
+          ×
         </button>
 
-        <img src={card.imageUrl} alt={card.name} className="modal__image" />
-
-        <ItemModal
-          isOpen={activeModal === "preview"}
-          card={selectedCard}
-          onCloseModal={closeActiveModal}
-          onDeleteItem={handleDeleteItem}
+        <img
+          src={card.imageUrl}
+          alt={card.name}
+          className="modal__image"
         />
 
-        <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-
+        <div className="modal__info">
+          <h2 className="modal__title">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
+
+          {/* DELETE BUTTON — per Figma */}
+          <button
+            className="modal__delete-button"
+            onClick={() => onDeleteItem(card)}
+          >
+            Delete Item
+          </button>
         </div>
       </div>
     </div>
