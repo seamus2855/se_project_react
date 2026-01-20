@@ -142,7 +142,7 @@ const App = () => {
         <ItemModal
           isOpen={activeModal === "preview"}
           card={selectedCard}
-          onClose={closeActiveModal}
+          onCloseModal={closeActiveModal}
           onDeleteItem={handleDeleteItem}
         />
       </div>

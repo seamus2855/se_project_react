@@ -1,6 +1,7 @@
 .clothes-section {
   padding: 20px;
   flex-grow: 1;
+  width: 1015px;
 }
 
 .clothes-section__header {
@@ -32,8 +33,7 @@
 
 .clothes-section__items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-template-rows: repeat(auto-fit, 283px);
+  grid-template-columns: repeat(auto-fill, minmax(283px, 1fr));
   gap: 20px;
   padding: 0;
 }

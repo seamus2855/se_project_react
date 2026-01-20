@@ -16,14 +16,14 @@ export const getItems = () => {
   }).then(checkResponse);
 };
 
-export const addCard = async ({ name, imageUrl }) => {
+export const addCard = async ({ name, imageUrl, weather }) => {
   try {
     const res = await fetch(`${baseUrl}/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, imageUrl }),
+      body: JSON.stringify({ name, imageUrl, weather }),
     });
 
     if (!res.ok) {
