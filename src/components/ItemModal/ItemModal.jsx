@@ -18,8 +18,8 @@ function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
         </button>
 
         <img
-          src={card.imageUrl}
-          alt={card.name}
+          src={card.imageUrl || card.link || ""}
+          alt={card.name || "Item preview"}
           className="modal__image"
         />
 

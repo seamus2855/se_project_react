@@ -13,13 +13,19 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 
-import * as auth from "../../utils/auth"; 
+import * as auth from "../../utils/auth";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 
 import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../utils/contexts/CurrentUserContext";
-import { getItems, addCard, removeCard, addCardLike, removeCardLike } from "../../utils/Api";
+import {
+  getItems,
+  addCard,
+  removeCard,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/Api";
 
 const App = () => {
   const [weatherData, setWeatherData] = useState({
@@ -63,13 +69,14 @@ const App = () => {
   // Auth Handlers
   const handleAuthorization = (email, password) => {
     if (!email || !password) return;
-    return auth.authorize(email, password)
+    return auth
+      .authorize(email, password)
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           // Check structure: if backend returns user inside 'user' key
           setIsLoggedIn(true);
-          setCurrentUser(data.user || data); 
+          setCurrentUser(data.user || data);
           closeActiveModal();
         }
       })
@@ -77,7 +84,8 @@ const App = () => {
   };
 
   const handleRegistration = ({ name, avatar, email, password }) => {
-    return auth.register(name, avatar, email, password)
+    return auth
+      .register(name, avatar, email, password)
       .then(() => {
         handleAuthorization(email, password);
       })
@@ -86,7 +94,8 @@ const App = () => {
 
   const handleUpdateUser = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
-    auth.updateUser(name, avatar, token)
+    auth
+      .updateUser(name, avatar, token)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
         closeActiveModal();
@@ -103,15 +112,15 @@ const App = () => {
   // LIKING LOGIC - Cleaned up and unified
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    
-    const request = !isLiked 
-      ? addCardLike(id, token) 
+
+    const request = !isLiked
+      ? addCardLike(id, token)
       : removeCardLike(id, token);
 
     request
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((item) => (item._id === id ? updatedCard : item))
+          cards.map((item) => (item._id === id ? updatedCard : item)),
         );
       })
       .catch(console.error);
@@ -132,7 +141,9 @@ const App = () => {
     const token = localStorage.getItem("jwt");
     removeCard(card._id, token)
       .then(() => {
-        setClothingItems((prev) => prev.filter((item) => item._id !== card._id));
+        setClothingItems((prev) =>
+          prev.filter((item) => item._id !== card._id),
+        );
         closeActiveModal();
       })
       .catch(console.error);
@@ -143,7 +154,8 @@ const App = () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) return;
 
-    auth.checkToken(jwt)
+    auth
+      .checkToken(jwt)
       .then((user) => {
         setIsLoggedIn(true);
         setCurrentUser(user);
@@ -167,7 +179,7 @@ const App = () => {
     getWeather(coordinates, APIKey)
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
-    
+
     getItems()
       .then((items) => setClothingItems(items))
       .catch(console.error);
@@ -180,11 +192,11 @@ const App = () => {
       >
         <div className="page">
           <div className="page__content">
-            <Header 
-              handleAddClick={handleAddClick} 
+            <Header
+              handleAddClick={handleAddClick}
               onRegisterClick={handleRegisterClick}
               onLoginClick={handleLoginClick}
-              weatherData={weatherData} 
+              weatherData={weatherData}
               isLoggedIn={isLoggedIn}
             />
 
@@ -243,7 +255,7 @@ const App = () => {
 
           <RegisterModal
             isOpen={activeModal === "register"}
-            onRegister={handleRegistration} // check prop name in Modal
+            onRegister={handleRegistration}
             onCloseModal={closeActiveModal}
             onLoginClick={handleLoginClick}
           />

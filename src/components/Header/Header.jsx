@@ -1,9 +1,17 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../../utils/contexts/CurrentUserContext";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import logo from "../../images/logo.svg"; // Ensure logo is imported
 import "./Header.css";
 
-const Header = ({ handleAddClick, onRegisterClick, onLoginClick, weatherData, isLoggedIn }) => {
+const Header = ({
+  handleAddClick,
+  onRegisterClick,
+  onLoginClick,
+  weatherData,
+  isLoggedIn,
+}) => {
   const currentUser = useContext(CurrentUserContext);
 
   // Helper to get first letter for placeholder
@@ -16,11 +24,18 @@ const Header = ({ handleAddClick, onRegisterClick, onLoginClick, weatherData, is
           <img src={logo} alt="logo" className="header__logo" />
         </Link>
         <p className="header__date-location">
-          {new Date().toLocaleString('default', { month: 'long', day: 'numeric' })}, {weatherData.city}
+          {new Date().toLocaleString("default", {
+            month: "long",
+            day: "numeric",
+          })}
+          , {weatherData.city}
         </p>
       </div>
 
       <div className="header__nav">
+        {/* ToggleSwitch added here to allow temperature unit switching */}
+        <ToggleSwitch />
+
         {isLoggedIn ? (
           <>
             <button className="header__add-btn" onClick={handleAddClick}>
@@ -29,7 +44,11 @@ const Header = ({ handleAddClick, onRegisterClick, onLoginClick, weatherData, is
             <Link to="/profile" className="header__user-container">
               <p className="header__user-name">{currentUser?.name}</p>
               {currentUser?.avatar ? (
-                <img src={currentUser.avatar} alt="avatar" className="header__avatar" />
+                <img
+                  src={currentUser.avatar}
+                  alt="avatar"
+                  className="header__avatar"
+                />
               ) : (
                 <div className="header__avatar-placeholder">{userLetter}</div>
               )}
@@ -37,8 +56,12 @@ const Header = ({ handleAddClick, onRegisterClick, onLoginClick, weatherData, is
           </>
         ) : (
           <div className="header__auth-container">
-            <button className="header__auth-btn" onClick={onRegisterClick}>Sign Up</button>
-            <button className="header__auth-btn" onClick={onLoginClick}>Log In</button>
+            <button className="header__auth-btn" onClick={onRegisterClick}>
+              Sign Up
+            </button>
+            <button className="header__auth-btn" onClick={onLoginClick}>
+              Log In
+            </button>
           </div>
         )}
       </div>

@@ -3,11 +3,11 @@ import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentUserContext from "../../utils/contexts/CurrentUserContext";
 
-function ClothesSection({ 
-  clothingItems, 
-  onAddClick, 
-  onCardClick, 
-  onCardLike // Add the like handler prop
+function ClothesSection({
+  clothingItems,
+  onAddClick,
+  onCardClick,
+  onCardLike, // Add the like handler prop
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -19,10 +19,7 @@ function ClothesSection({
     <section className="clothes-section">
       <div className="clothes-section__header">
         <h2 className="clothes-section__title">Your items</h2>
-        <button
-          className="clothes-section__add-button"
-          onClick={onAddClick}
-        >
+        <button className="clothes-section__add-button" onClick={onAddClick}>
           + Add new
         </button>
       </div>

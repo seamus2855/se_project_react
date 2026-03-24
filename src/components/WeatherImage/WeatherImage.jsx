@@ -1,6 +1,5 @@
 import React from "react";
-import "./WeatherImage.css";  // This connects the CSS to this component
-
+import "./WeatherImage.css"; // This connects the CSS to this component
 
 export default function WeatherImage() {
   // Hardcoded fallback image — replace with your own asset
@@ -9,11 +8,7 @@ export default function WeatherImage() {
 
   return (
     <div className="weather-image-wrapper">
-      <img
-        src={fallbackImage}
-        alt="Weather"
-        className="weather-image"
-      />
+      <img src={fallbackImage} alt="Weather" className="weather-image" />
     </div>
   );
 }

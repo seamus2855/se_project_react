@@ -1,4 +1,4 @@
-.modal {
+.item-modal {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -8,7 +8,7 @@
   z-index: 1000;
 }
 
-.modal__content {
+.item-modal__content {
   background-color: #fff;
   border-radius: 8px;
   padding: 24px;
