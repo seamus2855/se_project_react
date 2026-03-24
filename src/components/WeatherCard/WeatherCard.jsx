@@ -5,19 +5,20 @@ import { weatherOptions } from "../../utils/constants";
 
 function WeatherCard({ weatherData }) {
   const { currentTemperatureUnit } = React.useContext(
-    CurrentTemperatureUnitContext,
+    CurrentTemperatureUnitContext
   );
 
-  // Safely extract values
+  // Fallback to "clear" if type is missing
   const temp = weatherData?.temp?.[currentTemperatureUnit] ?? "--";
-  const type = weatherData?.type ?? "clear";
+  const type = weatherData?.type || "clear";
   const isDay = weatherData?.isDay ?? true;
 
-  // Use .find() to match both condition and day/night status within the array
+  // Find the matching option or fallback to a default
   const weatherOption = weatherOptions.find((option) => {
     return option.condition === type && option.day === isDay;
   });
 
+  // Priority: 1. Custom Image, 2. Constant URL, 3. Empty String
   const weatherImage = weatherData?.weatherImage || weatherOption?.url || "";
 
   return (
@@ -25,9 +26,12 @@ function WeatherCard({ weatherData }) {
       <p className="weather-card__temp">
         {temp}°{currentTemperatureUnit}
       </p>
-
       {weatherImage && (
-        <img src={weatherImage} alt={type} className="weather-card__image" />
+        <img 
+          src={weatherImage} 
+          alt={`Weather condition: ${type}`} 
+          className="weather-card__image" 
+        />
       )}
     </section>
   );
