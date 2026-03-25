@@ -8,8 +8,6 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
     imageUrl: "",
   });
 
-  // Reset when modal opens
-  // Reset when modal opens
   useEffect(() => {
     if (isOpen) {
       setValues({ name: "", imageUrl: "", weather: "" });

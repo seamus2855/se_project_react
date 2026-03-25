@@ -1,9 +1,17 @@
-import React, { useContext } from "react"; // Import useContext
+import React, { useContext, useState, useEffect } from "react";
 import "./ItemModal.css";
-import CurrentUserContext from "../../utils/contexts/CurrentUserContext"; // Import the context
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
-  const currentUser = useContext(CurrentUserContext); // Subscribe to context
+  const currentUser = useContext(CurrentUserContext);
+  const [isConfirming, setIsConfirming] = useState(false);
+
+  // Reset confirmation state whenever the modal closes or a new card is selected
+  useEffect(() => {
+    if (!isOpen) {
+      setIsConfirming(false);
+    }
+  }, [isOpen]);
 
   // Check if the current user is the owner of the item
   const isOwn = card?.owner === currentUser?._id;
@@ -29,14 +37,34 @@ function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
 
-          {/* Render Delete button ONLY if the user owns the item */}
+          {/* Render Delete button OR Confirmation prompt ONLY if the user owns the item */}
           {isOwn && (
-            <button
-              className="modal__delete-button"
-              onClick={() => onDeleteItem(card)}
-            >
-              Delete Item
-            </button>
+            <div className="modal__delete-container">
+              {!isConfirming ? (
+                <button
+                  className="modal__delete-button"
+                  onClick={() => setIsConfirming(true)}
+                >
+                  Delete Item
+                </button>
+              ) : (
+                <div className="modal__confirm-delete">
+                  <p className="modal__confirm-text">Are you sure?</p>
+                  <button
+                    className="modal__confirm-button"
+                    onClick={() => onDeleteItem(card)}
+                  >
+                    Yes, delete item
+                  </button>
+                  <button
+                    className="modal__cancel-button"
+                    onClick={() => setIsConfirming(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>

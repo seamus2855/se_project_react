@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+// Added useNavigate to the import list below
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Header from "../Header/Header";
@@ -17,8 +18,8 @@ import * as auth from "../../utils/auth";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 
-import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
-import CurrentUserContext from "../../utils/contexts/CurrentUserContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext"
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import {
   getItems,
   addCard,
@@ -28,6 +29,8 @@ import {
 } from "../../utils/Api";
 
 const App = () => {
+  const navigate = useNavigate(); // Initialized the navigate hook
+
   const [weatherData, setWeatherData] = useState({
     type: "cold",
     temp: { F: 999, C: 999 },
@@ -74,10 +77,10 @@ const App = () => {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
-          // Check structure: if backend returns user inside 'user' key
           setIsLoggedIn(true);
           setCurrentUser(data.user || data);
           closeActiveModal();
+          navigate("/"); // Redirect to main page after successful login
         }
       })
       .catch(console.error);
@@ -107,9 +110,10 @@ const App = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
+    navigate("/"); // Redirect to home page on logout
   };
 
-  // LIKING LOGIC - Cleaned up and unified
+  // LIKING LOGIC
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
 
@@ -231,7 +235,7 @@ const App = () => {
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
 
-            <Footer />
+            <Footer weatherData={weatherData} />
           </div>
 
           <AddItemModal
@@ -262,7 +266,7 @@ const App = () => {
 
           <LoginModal
             isOpen={activeModal === "login"}
-            onLogin={handleAuthorization} // check prop name in Modal
+            onLogin={handleAuthorization}
             onCloseModal={closeActiveModal}
             onRegisterClick={handleRegisterClick}
           />

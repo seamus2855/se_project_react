@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import CurrentUserContext from "../../utils/contexts/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import logo from "../../images/logo.svg"; // Ensure logo is imported
+import logo from "../..assets/logo.svg";
 import "./Header.css";
 
 const Header = ({

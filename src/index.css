@@ -8,3 +8,5 @@
 @import "./components/ModalWithForm/ModalWithForm.css";
 @import "./components/ToggleSwitch/ToggleSwitch.css";
 @import "./components/SideBar/SideBar.css";
+@import url(./vendor/fonts.css);
+@import url(./vendor/normalize.css);

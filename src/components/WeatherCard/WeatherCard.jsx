@@ -1,11 +1,11 @@
 import React from "react";
 import "./WeatherCard.css";
-import CurrentTemperatureUnitContext from "../../utils/contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { weatherOptions } from "../../utils/constants";
 
 function WeatherCard({ weatherData }) {
   const { currentTemperatureUnit } = React.useContext(
-    CurrentTemperatureUnitContext
+    CurrentTemperatureUnitContext,
   );
 
   // Fallback to "clear" if type is missing
@@ -27,10 +27,10 @@ function WeatherCard({ weatherData }) {
         {temp}°{currentTemperatureUnit}
       </p>
       {weatherImage && (
-        <img 
-          src={weatherImage} 
-          alt={`Weather condition: ${type}`} 
-          className="weather-card__image" 
+        <img
+          src={weatherImage}
+          alt={`Weather condition: ${type}`}
+          className="weather-card__image"
         />
       )}
     </section>
