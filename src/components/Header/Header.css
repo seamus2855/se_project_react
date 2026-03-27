@@ -1,103 +1,26 @@
-/* Header container */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 32px 0 28px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Inner content wrapper */
-.header__content {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 24px;
-}
-
-/* Logo */
-.header__logo {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0;
-  white-space: nowrap;
-}
-
-/* Weather section */
-.header__weather {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-size: 16px;
-}
-
-.header__temp {
-  font-weight: 600;
-}
-
-.header__city {
-  color: #555;
-}
-
-/* Add garment button */
-.header__add-button {
-  margin-left: auto;
-  padding: 8px 14px;
-  border: none;
-  background: #000;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
-}
-
-.header__avatar {
-  width: 36px;
-  height: 36px;
+.header__avatar,
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: #000;
-  color: #fff;
+  object-fit: cover;
+}
+
+.header__avatar-placeholder {
+  background-color: #007bff; /* Or any brand color */
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
 }
 
-.header__add-button:hover {
-  background: #333;
-}
-
-.header__weather-header {
+.header__user-container {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-right: auto;
-}
-
-.header__date {
-  font-size: 14px;
-  color: #555;
-}
-
-.header__location {
-  font-size: 14px;
-  color: #777;
-}
-
-.header__temp-large {
-  font-size: 28px;
-  font-weight: 700;
-  color: #000;
-}
-
-.header__nav-link {
-  color: black;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
-}
-
-.header__controls {
-  display: flex;
+  color: black;
 }

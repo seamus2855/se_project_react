@@ -1,50 +1,72 @@
-import React from "react";
-import "./Header.css";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { NavLink } from "react-router-dom";
+import logo from "../..assets/logo.svg";
+import "./Header.css";
 
-function Header({ handleAddClick, weatherData }) {
-  const temp = weatherData?.temp?.F ?? "--";
-  const city = weatherData?.city || "your area";
+const Header = ({
+  handleAddClick,
+  onRegisterClick,
+  onLoginClick,
+  weatherData,
+  isLoggedIn,
+}) => {
+  const currentUser = useContext(CurrentUserContext);
 
-  const dateString = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
-  });
+  // Helper to get first letter for placeholder
+  const userLetter = currentUser?.name?.charAt(0).toUpperCase() || "";
 
   return (
     <header className="header">
-      <div className="header__content">
-        <div className="header__weather-header">
-          <span className="header__date">{dateString}</span>
-          <span className="header__location">in {city}</span>
-        </div>
+      <div className="header__logo-container">
+        <Link to="/">
+          <img src={logo} alt="logo" className="header__logo" />
+        </Link>
+        <p className="header__date-location">
+          {new Date().toLocaleString("default", {
+            month: "long",
+            day: "numeric",
+          })}
+          , {weatherData.city}
+        </p>
+      </div>
 
-        <NavLink to="/" className="header__logo-link">
-          <h1 className="header__logo">WTWR — What To Wear</h1>
-        </NavLink>
+      <div className="header__nav">
+        {/* ToggleSwitch added here to allow temperature unit switching */}
+        <ToggleSwitch />
 
-        <NavLink to="/profile" className="header__profile-link">
-          Terrence Tegegne
-        </NavLink>
-
-        <NavLink to="/profile" className="header__avatar-link">
-          <div className="header__avatar">TT</div>
-        </NavLink>
-
-        <div className="header__controls">
-          <ToggleSwitch />
-          <button
-            type="button"
-            className="header__add-button"
-            onClick={handleAddClick}
-          >
-            + Add Clothes
-          </button>
-        </div>
+        {isLoggedIn ? (
+          <>
+            <button className="header__add-btn" onClick={handleAddClick}>
+              + Add clothes
+            </button>
+            <Link to="/profile" className="header__user-container">
+              <p className="header__user-name">{currentUser?.name}</p>
+              {currentUser?.avatar ? (
+                <img
+                  src={currentUser.avatar}
+                  alt="avatar"
+                  className="header__avatar"
+                />
+              ) : (
+                <div className="header__avatar-placeholder">{userLetter}</div>
+              )}
+            </Link>
+          </>
+        ) : (
+          <div className="header__auth-container">
+            <button className="header__auth-btn" onClick={onRegisterClick}>
+              Sign Up
+            </button>
+            <button className="header__auth-btn" onClick={onLoginClick}>
+              Log In
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );
-}
+};
 
 export default Header;

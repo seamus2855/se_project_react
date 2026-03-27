@@ -2,7 +2,11 @@ const baseUrl = "http://localhost:3001";
 
 const checkResponse = (res) => {
   if (res.ok) {
-    return res.json();
+    const contentType = res.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      return res.json();
+    }
+    return Promise.reject(`Error: Expected JSON but received ${contentType}`);
   }
   return Promise.reject(`Error: ${res.status}`);
 };
@@ -16,45 +20,45 @@ export const getItems = () => {
   }).then(checkResponse);
 };
 
-export const addCard = async ({ name, imageUrl, weather }) => {
-  try {
-    const res = await fetch(`${baseUrl}/items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, imageUrl, weather }),
-    });
-
-    if (!res.ok) {
-      throw new Error(`Request failed with status ${res.status}`);
-    }
-
-    return await res.json();
-  } catch (err) {
-    console.error("Error adding item:", err);
-    throw err;
-  }
+export const addCard = ({ name, imageUrl, weather }, token) => {
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, imageUrl, weather }),
+  }).then(checkResponse);
 };
 
-export const removeCard = async (cardID) => {
-  try {
-    const res = await fetch(`${baseUrl}/items/${cardID}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+export const removeCard = (cardId, token) => {
+  return fetch(`${baseUrl}/items/${cardId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
 
-    if (!res.ok) {
-      throw new Error(`Failed to delete item with status ${res.status}`);
-    }
+// NEW: Add a like to a card
+export const addCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
 
-    if (res.status === 204) return;
-
-    return await res.json();
-  } catch (err) {
-    console.error("Error deleting item:", err);
-    throw err;
-  }
+// NEW: Remove a like from a card
+export const removeCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 };
