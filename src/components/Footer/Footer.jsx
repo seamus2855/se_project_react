@@ -23,8 +23,9 @@ function Footer({ weatherData }) {
           Weather: {temp}°F in {city}
         </p>
         <p className="footer__suggestion">Suggestion: {suggestion}</p>
+        {/* Added author name below to meet checklist requirements */}
         <p className="footer__copyright">
-          © {new Date().getFullYear()} WTWR — What To Wear Today
+          © {new Date().getFullYear()} Seamus Ryan
         </p>
       </div>
     </footer>
