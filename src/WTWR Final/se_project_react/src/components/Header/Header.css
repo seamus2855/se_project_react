@@ -1,0 +1,47 @@
+/* Avatar & Placeholder Styling */
+.header__avatar,
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header__avatar-placeholder {
+  background-color: #000; /* Black background for the avatar fallback */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* User Profile Section */
+.header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Matches Figma's spacing between name and avatar */
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s ease;
+}
+
+.header__user-container:hover {
+  opacity: 0.6;
+}
+
+.header__user-name {
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+/* Added for overall Header structure consistency */
+.header__user-section {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Space between "+ Add clothes" and User Profile */
+}

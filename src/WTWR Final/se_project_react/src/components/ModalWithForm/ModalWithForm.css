@@ -1,0 +1,123 @@
+/* Modal Overlay */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+/* Modal Content Box */
+.modal__content {
+  background-color: #fff;
+  border-radius: 20px; /* Matching the rounded design */
+  max-width: 496px;
+  width: 100%;
+  padding: 28px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Modal Title */
+.modal__title {
+  margin: 0 0 24px 0;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000;
+}
+
+/* Close Button */
+.modal__close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: url("../../assets/close-button.svg") center no-repeat; /* Ensure path is correct */
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Form Layout */
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label and Input Styling */
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal__input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 8px 0;
+  font-family: "CabinetGrotesk-Regular", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  outline: none;
+}
+
+.modal__input:focus {
+  border-bottom: 1px solid #000;
+}
+
+/* Submit and Redirect Buttons Container */
+.modal__submit-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.modal__submit {
+  padding: 12px 24px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.modal__submit:hover {
+  opacity: 0.8;
+}
+
+.modal__submit:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+}
+
+/* Secondary/Redirect Button Styling */
+.modal__redirect-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+  color: #000;
+}
+
+.modal__redirect-button:hover {
+  opacity: 0.6;
+}
