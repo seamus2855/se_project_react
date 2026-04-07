@@ -12,10 +12,12 @@ const Header = ({
   weatherData,
   isLoggedIn,
 }) => {
-  const currentUser = useContext(CurrentUserContext);
+  // Access currentUser directly from the context
+  const { currentUser } = useContext(CurrentUserContext);
+
+  // Generate the first letter of the name for the placeholder
   const userLetter = currentUser?.name?.charAt(0).toUpperCase() || "";
 
-  // Formatting date to match design: "Month Day" (e.g., "October 10")
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",

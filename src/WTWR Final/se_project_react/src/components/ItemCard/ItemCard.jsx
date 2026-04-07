@@ -7,10 +7,10 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   if (!item) return null;
 
-  // Check if the current user's ID is in the likes array
+  // Check if current user ID exists in the likes array
   const isLiked = item.likes?.some((id) => id === currentUser?._id);
 
-  // Dynamic class for the like button
+  // Dynamic class for the button
   const itemLikeButtonClassName = `item-card__like-btn ${
     isLiked ? "item-card__like-btn_active" : "item-card__like-btn_inactive"
   }`;
@@ -20,7 +20,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   };
 
   const handleLike = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevents opening the modal when liking
     onCardLike(item, isLiked);
   };
 
@@ -28,7 +28,6 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     <li className="item-card">
       <div className="item-card__header">
         <h2 className="item-card__name">{item.name}</h2>
-        {/* Only show the like button if a user is logged in */}
         {currentUser && (
           <button
             className={itemLikeButtonClassName}

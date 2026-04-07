@@ -1,42 +1,3 @@
-/* Card Container */
-.item-card {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 325px;
-  box-sizing: border-box;
-}
-
-/* Card Header (Title and Like Button) */
-.item-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  box-sizing: border-box;
-}
-
-/* Card Name */
-.item-card__name {
-  margin: 0;
-  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  color: #000;
-  word-break: break-word;
-}
-
-/* Card Image */
-.item-card__image {
-  width: 100%;
-  height: 325px;
-  object-fit: cover;
-  border-radius: 12px;
-  cursor: pointer;
-  display: block;
-}
-
 /* Like Button Base */
 .item-card__like-btn {
   width: 22px;
@@ -45,20 +6,31 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain; /* Ensures the SVG fits the 22x20px area */
   cursor: pointer;
   padding: 0;
-  transition: opacity 0.3s ease;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  display: flex; /* Helps with vertical alignment in the header */
 }
 
 .item-card__like-btn:hover {
   opacity: 0.6;
+  transform: scale(1.1); /* Adds a small interactive pop */
 }
 
-/* Like Button States */
+/* Like Button States - Verify these file paths */
 .item-card__like-btn_inactive {
-  background-image: url("../../images/like-inactive.svg"); /* Update path to your actual SVG */
+  background-image: url("../../images/like-inactive.svg");
 }
 
 .item-card__like-btn_active {
-  background-image: url("../../images/like-active.svg"); /* Update path to your actual SVG */
+  background-image: url("../../images/like-active.svg");
+}
+
+/* Card Header Fix */
+.item-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically centers the name and heart icon */
+  padding: 12px 0;
 }

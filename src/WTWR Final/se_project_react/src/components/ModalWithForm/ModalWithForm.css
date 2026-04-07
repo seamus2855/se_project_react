@@ -16,7 +16,7 @@
 /* Modal Content Box */
 .modal__content {
   background-color: #fff;
-  border-radius: 20px; /* Matching the rounded design */
+  border-radius: 20px; /* Rounded corners per design */
   max-width: 496px;
   width: 100%;
   padding: 28px;
@@ -41,7 +41,8 @@
   width: 24px;
   height: 24px;
   border: none;
-  background: url("../../assets/close-button.svg") center no-repeat; /* Ensure path is correct */
+  background: url("../../assets/close-button.svg") center no-repeat;
+  background-size: contain;
   cursor: pointer;
   padding: 0;
 }
@@ -56,32 +57,38 @@
 .modal__label {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 8px; /* Space between label text and input */
   margin-bottom: 20px;
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
+  color: #000;
 }
 
 .modal__input {
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3); /* Underline style per project specs */
   padding: 8px 0;
   font-family: "CabinetGrotesk-Regular", Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
   outline: none;
+  background: transparent;
 }
 
 .modal__input:focus {
   border-bottom: 1px solid #000;
 }
 
+.modal__input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
 /* Submit and Redirect Buttons Container */
 .modal__submit-container {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 16px; /* Horizontal gap between primary and secondary buttons */
   margin-top: 20px;
 }
 
@@ -115,7 +122,8 @@
   font-size: 16px;
   line-height: 20px;
   cursor: pointer;
-  color: #000;
+  color: #0049ff; /* Standard project blue for links */
+  text-decoration: none;
 }
 
 .modal__redirect-button:hover {

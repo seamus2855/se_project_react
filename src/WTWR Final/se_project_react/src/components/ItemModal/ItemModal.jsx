@@ -1,10 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./ItemModal.css";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+// IMPORT FIX: Ensure this is imported as a named or default export correctly 
+// based on your file (usually { CurrentUserContext })
+import { CurrentUserContext } from "../../contexts/CurrentUserContext"; 
 import useModalClose from "../../hooks/useModalClose";
 
 function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
-  const currentUser = useContext(CurrentUserContext);
+  // FIX: Destructure currentUser from the context object
+  const { currentUser } = useContext(CurrentUserContext);
+  
   const [isConfirming, setIsConfirming] = useState(false);
 
   // Use the custom hook for Escape and Overlay clicks
@@ -16,6 +20,7 @@ function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
     }
   }, [isOpen]);
 
+  // FIX: isOwn will now correctly evaluate because currentUser is the user object, not the whole context
   const isOwn = card?.owner === currentUser?._id;
 
   if (!isOpen || !card) return null;
@@ -23,10 +28,10 @@ function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
   return (
     <div className="modal modal_opened">
       <div className="modal__content modal__content_type_image">
-        <button 
-          className="modal__close" 
-          type="button" 
-          onClick={onCloseModal} 
+        <button
+          className="modal__close"
+          type="button"
+          onClick={onCloseModal}
           aria-label="Close"
         />
         <img
@@ -40,6 +45,7 @@ function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
             <p className="modal__weather-text">Weather: {card.weather}</p>
           </div>
 
+          {/* This button will now show up automatically as soon as currentUser loads */}
           {isOwn && (
             <div className="modal__delete-container">
               {!isConfirming ? (
