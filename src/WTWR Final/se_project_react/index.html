@@ -5,8 +5,40 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    
+    <!-- FIX: Correct Play CDN URL for Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+      /* Custom focus-visible styles for better accessibility */
+      input:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      /* Consistent Label Design for your Modals */
+      label {
+        display: block;
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 500;    /* font-medium */
+        color: #334155;      /* text-slate-700 */
+        margin-bottom: 0.5rem; /* space-y-2 equivalent */
+      }
+
+      /* Modern Input Design */
+      input[type="text"], 
+      input[type="email"], 
+      input[type="password"],
+      textarea {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #cbd5e1;
+        transition: all 0.2s;
+      }
+    </style>
   </head>
-  <body>
+  <body class="bg-slate-50 antialiased text-slate-900">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
