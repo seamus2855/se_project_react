@@ -1,14 +1,11 @@
 import { checkResponse, baseUrl } from "./api";
 
-/**
- * Reusable request helper to handle fetch and response checking.
- * Uses the imported checkResponse from api.js to ensure consistency.
- */
-function request(url, options) {
+// Added export so you can reuse this helper elsewhere if needed
+export function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-export const register = (name, avatar, email, password) => {
+export const register = ({ name, avatar, email, password }) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
@@ -33,7 +30,8 @@ export const checkToken = (token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      // Ensure "Authorization" is capitalized (standard practice)
+      Authorization: `Bearer ${token}`,
     },
   });
 };
@@ -43,7 +41,7 @@ export const updateUser = (name, avatar, token) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
   });

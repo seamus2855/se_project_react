@@ -20,7 +20,13 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { getItems, addCard, removeCard, addCardLike, removeCardLike } from "../../utils/api";
+import {
+  getItems,
+  addCard,
+  removeCard,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 
 const App = () => {
   const navigate = useNavigate();
@@ -77,15 +83,30 @@ const App = () => {
 
   // Auth Handlers
   const handleAuthorization = (email, password) => {
+    if (!email || !password) return;
     const makeRequest = () => {
-      return auth.authorize(email, password).then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          setIsLoggedIn(true);
-          setCurrentUser(data.user || data);
-          navigate("/");
-        }
-      });
+      return auth
+        .authorize(email, password)
+        .then((data) => {
+          if (data.token) {
+            localStorage.setItem("jwt", data.token);
+            const jwt = localStorage.getItem("jwt");
+            if (!jwt) return;
+
+            auth
+              .checkToken(jwt) // this way
+              .then((user) => {
+                setIsLoggedIn(true);
+                setCurrentUser(user);
+                closeActiveModal();
+                navigate("/"); // Redirect to main page after successful login
+              })
+              .catch((err) => {
+                console.error("Token validation failed:", err);
+              });
+          }
+        })
+        .catch(console.error);
     };
     handleSubmit(makeRequest);
   };
@@ -119,12 +140,14 @@ const App = () => {
   // LIKING LOGIC
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    const request = !isLiked ? addCardLike(id, token) : removeCardLike(id, token);
-    
+    const request = !isLiked
+      ? addCardLike(id, token)
+      : removeCardLike(id, token);
+
     request
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((item) => (item._id === id ? updatedCard : item))
+          cards.map((item) => (item._id === id ? updatedCard : item)),
         );
       })
       .catch(console.error);
@@ -145,7 +168,9 @@ const App = () => {
     const token = localStorage.getItem("jwt");
     const makeRequest = () => {
       return removeCard(card._id, token).then(() => {
-        setClothingItems((prev) => prev.filter((item) => item._id !== card._id));
+        setClothingItems((prev) =>
+          prev.filter((item) => item._id !== card._id),
+        );
       });
     };
     handleSubmit(makeRequest);
@@ -155,7 +180,8 @@ const App = () => {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth.checkToken(jwt)
+      auth
+        .checkToken(jwt)
         .then((user) => {
           setIsLoggedIn(true);
           setCurrentUser(user);
