@@ -2,34 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-    
-    <!-- FIX: Correct Play CDN URL for Tailwind CSS -->
+    <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-      /* Custom focus-visible styles for better accessibility */
+      /* Custom focus-visible styles */
       input:focus-visible {
         outline: 2px solid #3b82f6;
         outline-offset: 2px;
       }
-
-      /* Consistent Label Design for your Modals */
+      /* Consistent Label Design */
       label {
         display: block;
-        font-size: 0.875rem; /* text-sm */
-        font-weight: 500;    /* font-medium */
-        color: #334155;      /* text-slate-700 */
-        margin-bottom: 0.5rem; /* space-y-2 equivalent */
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #334155;
+        margin-bottom: 0.5rem;
       }
-
       /* Modern Input Design */
-      input[type="text"], 
-      input[type="email"], 
-      input[type="password"],
-      textarea {
+      input[type="text"], input[type="email"], input[type="password"], textarea {
         width: 100%;
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
@@ -38,8 +30,30 @@
       }
     </style>
   </head>
-  <body class="bg-slate-50 antialiased text-slate-900">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body class="bg-slate-50 antialiased text-slate-900 p-8">
+    
+    <!-- Content goes here for testing -->
+    <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md">
+      <h1 class="text-2xl font-bold mb-4">Account Setup</h1>
+      <div class="space-y-4">
+        <div>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="John Doe">
+        </div>
+        <div>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com">
+        </div>
+        <button class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition">
+          Save Changes
+        </button>
+      </div>
+    </div>
+
+    <!-- 
+      NOTE: In a real Vite project, the line below is correct. 
+      But it only works if you run 'npm run dev'.
+    -->
+    <!-- <script type="module" src="/src/main.jsx"></script> -->
   </body>
 </html>
