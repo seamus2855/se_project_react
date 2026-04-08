@@ -9,7 +9,6 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal, isLoading }) => {
     weather: "",
   });
 
-  // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
       setValues({ name: "", imageUrl: "", weather: "" });
@@ -28,8 +27,8 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal, isLoading }) => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onSubmit={handleSubmit}
+      name="add-garment"
     >
-      {/* Name Input */}
       <label className="modal__label">
         Name
         <input
@@ -42,8 +41,6 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal, isLoading }) => {
           required
         />
       </label>
-
-      {/* Image URL Input */}
       <label className="modal__label">
         Image
         <input
@@ -56,8 +53,6 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal, isLoading }) => {
           required
         />
       </label>
-
-      {/* Radio Weather Selection */}
       <fieldset className="modal__fieldset">
         <legend className="modal__legend">Select the weather type:</legend>
         <div className="modal__radio-buttons">

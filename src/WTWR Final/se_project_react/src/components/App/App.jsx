@@ -84,31 +84,28 @@ const App = () => {
   // Auth Handlers
   const handleAuthorization = (email, password) => {
     if (!email || !password) return;
-    const makeRequest = () => {
-      return auth
-        .authorize(email, password)
-        .then((data) => {
-          if (data.token) {
-            localStorage.setItem("jwt", data.token);
-            const jwt = localStorage.getItem("jwt");
-            if (!jwt) return;
+    return auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          const jwt = localStorage.getItem("jwt");
+          if (!jwt) return;
 
-            auth
-              .checkToken(jwt) // this way
-              .then((user) => {
-                setIsLoggedIn(true);
-                setCurrentUser(user);
-                closeActiveModal();
-                navigate("/"); // Redirect to main page after successful login
-              })
-              .catch((err) => {
-                console.error("Token validation failed:", err);
-              });
-          }
-        })
-        .catch(console.error);
-    };
-    handleSubmit(makeRequest);
+          auth
+            .checkToken(jwt) // this way
+            .then((user) => {
+              setIsLoggedIn(true);
+              setCurrentUser(user);
+              closeActiveModal();
+              navigate("/"); // Redirect to main page after successful login
+            })
+            .catch((err) => {
+              console.error("Token validation failed:", err);
+            });
+        }
+      })
+      .catch(console.error);
   };
 
   const handleRegistration = ({ name, avatar, email, password }) => {
