@@ -6,8 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
+
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <React.StrictMode>
+    {/* Silences Future Flag Warnings */}
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );
