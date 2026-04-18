@@ -10,8 +10,10 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     {/* Silences Future Flag Warnings */}
-    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
