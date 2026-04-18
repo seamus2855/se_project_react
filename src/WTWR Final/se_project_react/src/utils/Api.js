@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost:3001";
+// Use "/api" to match your vite.config.js proxy setting
+// This tells Vite to forward the request to http://localhost:3001
+const baseUrl = "/api"; 
 
 const checkResponse = (res) => {
   if (res.ok) {
@@ -6,12 +8,12 @@ const checkResponse = (res) => {
     if (contentType && contentType.includes("application/json")) {
       return res.json();
     }
+    // This part catches the "received text/html" error
     return Promise.reject(`Error: Expected JSON but received ${contentType}`);
   }
   return Promise.reject(`Error: ${res.status}`);
 };
 
-// Reusable request helper to avoid repeating .then(checkResponse)
 function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }

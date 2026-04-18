@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // Mount all routes
-app.use("/", routes);
+app.use("/ api", routes);
 
 // FIX: Catch-all JSON handler for missing routes
 app.use((req, res) => {

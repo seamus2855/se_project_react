@@ -7,10 +7,10 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
-    // Add this proxy section
     proxy: {
+      // Any request starting with /api will be sent to the backend
       '/api': {
-        target: 'http://localhost:5000', // Change to your actual backend port
+        target: 'http://localhost:3001', 
         changeOrigin: true,
         secure: false,
       },
