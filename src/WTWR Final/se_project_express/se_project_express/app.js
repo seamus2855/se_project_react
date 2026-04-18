@@ -1,0 +1,28 @@
+/* eslint-disable no-console */
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const routes = require("./routes");
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// Mount all routes
+app.use("/", routes);
+
+// FIX: Catch-all JSON handler for missing routes
+app.use((req, res) => {
+  res.status(404).json({ message: `Route ${req.originalUrl} not found on this server.` });
+});
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/wtwr_db")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+app.listen(3001, () => {
+  console.log("Server is running on port 3001");
+});
+
+module.exports = app;
