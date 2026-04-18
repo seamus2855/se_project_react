@@ -1,6 +1,6 @@
 // Use "/api" to match your vite.config.js proxy setting
 // This tells Vite to forward the request to http://localhost:3001
-const baseUrl = "/api"; 
+const baseUrl = "/api";
 
 const checkResponse = (res) => {
   if (res.ok) {
