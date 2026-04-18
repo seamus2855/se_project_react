@@ -8,9 +8,9 @@ export default defineConfig({
     port: 3000,
     open: true,
     proxy: {
-      // Any request starting with /api will be sent to the backend
       '/api': {
-        target: 'http://localhost:3001', 
+        // CHANGED: Use 127.0.0.1 instead of localhost for more reliable IPv4 routing
+        target: 'http://127.0.0.1:3001', 
         changeOrigin: true,
         secure: false,
       },
