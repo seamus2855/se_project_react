@@ -1,6 +1,6 @@
 import React from "react";
 import "./ModalWithForm.css";
-import useForm from "../../hooks"; // Import the custom hook
+import useForm from "../../hooks/useForm"; // Import the custom hook
 
 function ModalWithForm({
   isOpen,
