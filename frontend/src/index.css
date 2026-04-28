@@ -1,4 +1,8 @@
-@import url(./vendor/normalize.css);
+/* Use URL for vendor files and ensure paths are correct */
+@import url("./vendor/normalize.css");
+@import url("./vendor/fonts.css");
+
+/* For local component styles, ensure the folder structure exists */
 @import "./components/Header/Header.css";
 @import "./components/Main/Main.css";
 @import "./components/Footer/Footer.css";
@@ -9,4 +13,3 @@
 @import "./components/ModalWithForm/ModalWithForm.css";
 @import "./components/ToggleSwitch/ToggleSwitch.css";
 @import "./components/SideBar/SideBar.css";
-@import url(./vendor/fonts.css);
