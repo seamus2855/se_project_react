@@ -1,15 +1,15 @@
-/* Use URL for vendor files and ensure paths are correct */
+/* 1. Vendor Files */
 @import url("./vendor/normalize.css");
 @import url("./vendor/fonts.css");
 
-/* For local component styles, ensure the folder structure exists */
-@import "./components/Header/Header.css";
-@import "./components/Main/Main.css";
-@import "./components/Footer/Footer.css";
-@import "./components/WeatherImage/WeatherImage.css";
-@import "./components/WeatherCard/WeatherCard.css";
-@import "./components/ItemCard/ItemCard.css";
-@import "./components/ItemModal/ItemModal.css";
-@import "./components/ModalWithForm/ModalWithForm.css";
-@import "./components/ToggleSwitch/ToggleSwitch.css";
-@import "./components/SideBar/SideBar.css";
+/* 2. Component Styles (Use url() for reliability) */
+@import url("./components/Header/Header.css");
+@import url("./components/Main/Main.css");
+@import url("./components/Footer/Footer.css");
+@import url("./components/WeatherImage/WeatherImage.css");
+@import url("./components/WeatherCard/WeatherCard.css");
+@import url("./components/ItemCard/ItemCard.css");
+@import url("./components/ItemModal/ItemModal.css");
+@import url("./components/ModalWithForm/ModalWithForm.css");
+@import url("./components/ToggleSwitch/ToggleSwitch.css");
+@import url("./components/SideBar/SideBar.css");
