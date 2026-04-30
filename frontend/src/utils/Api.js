@@ -1,25 +1,20 @@
-/* se_project_react/src/utils/Api.js */
+/* se_project_react/src/utils/api.js */
 
-// Use the relative path to trigger the Vite proxy (port 3000 -> 3001)
-const baseUrl = "/api";
+// Use process.env or import.meta.env if you need to toggle between production and development
+const baseUrl = "http://localhost:3001"; // Or "/api" if your Vite proxy is confirmed working
 
 /**
- * Validates that the response is successful and is actual JSON data.
- * This is the direct fix for the "Expected JSON but received text/html" error.
+ * Validates the response status and content type.
  */
 const checkResponse = (res) => {
   if (res.ok) {
-    const contentType = res.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      return res.json();
-    }
-    return Promise.reject(`Error: Expected JSON but received ${contentType}`);
+    return res.json();
   }
   return Promise.reject(`Error: ${res.status}`);
 };
 
 /**
- * Reusable helper to keep the code DRY
+ * Reusable request helper
  */
 function request(url, options) {
   return fetch(url, options).then(checkResponse);
@@ -31,7 +26,6 @@ export const getItems = () => {
   return request(`${baseUrl}/items`, {
     method: "GET",
     headers: {
-      Accept: "application/json", // Tells server you only want JSON
       "Content-Type": "application/json",
     },
   });
@@ -41,7 +35,6 @@ export const addCard = ({ name, imageUrl, weather }, token) => {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
@@ -53,7 +46,6 @@ export const removeCard = (cardId, token) => {
   return request(`${baseUrl}/items/${cardId}`, {
     method: "DELETE",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
@@ -64,7 +56,6 @@ export const addCardLike = (id, token) => {
   return request(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
@@ -75,7 +66,6 @@ export const removeCardLike = (id, token) => {
   return request(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },

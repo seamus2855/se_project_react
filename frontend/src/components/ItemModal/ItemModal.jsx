@@ -3,7 +3,7 @@ import "./ItemModal.css";
 // IMPORT FIX: Ensure this is imported as a named or default export correctly 
 // based on your file (usually { CurrentUserContext })
 import { CurrentUserContext } from "../../contexts/CurrentUserContext"; 
-import useModalClose from "../../hooks/useModalClose";
+import useForm from "../../hooks/useForm";
 
 function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
   // FIX: Destructure currentUser from the context object
