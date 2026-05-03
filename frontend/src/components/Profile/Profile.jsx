@@ -2,7 +2,7 @@ import React, { useContext } from "react"; // 1. Import useContext
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext"; // 2. Import your context
+import CurrentUserContext from "../../contexts/CurrentUserContext"; // 2. Import your context
 
 function Profile({
   clothingItems,

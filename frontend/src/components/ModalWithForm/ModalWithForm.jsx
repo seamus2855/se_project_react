@@ -1,6 +1,6 @@
 import React from "react";
 import "./ModalWithForm.css";
-import useForm from "../../hooks/useForm"; // Import the custom hook
+import { useForm } from "../../hooks/useForm"; // Import the custom hook
 
 function ModalWithForm({
   isOpen,
@@ -11,7 +11,6 @@ function ModalWithForm({
   onSubmit,
 }) {
   // Use the custom hook for Escape key and Overlay clicks
-  useModalClose(isOpen, onClose);
 
   if (!isOpen) return null;
 

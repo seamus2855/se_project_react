@@ -4,7 +4,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const EditProfileModal = ({ isOpen, onUpdateUser, onCloseModal, isLoading }) => {
   // FIX: Destructure currentUser from context object
-  const { currentUser } = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");

@@ -13,7 +13,7 @@ const Header = ({
   isLoggedIn,
 }) => {
   // Access currentUser directly from the context
-  const { currentUser } = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   // Generate the first letter of the name for the placeholder
   const userLetter = currentUser?.name?.charAt(0).toUpperCase() || "";

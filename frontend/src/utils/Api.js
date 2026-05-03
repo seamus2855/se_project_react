@@ -1,12 +1,12 @@
 /* se_project_react/src/utils/api.js */
 
 // Use process.env or import.meta.env if you need to toggle between production and development
-const baseUrl = "http://localhost:3001"; // Or "/api" if your Vite proxy is confirmed working
+export const baseUrl = "http://localhost:3001"; // Or "/api" if your Vite proxy is confirmed working
 
 /**
  * Validates the response status and content type.
  */
-const checkResponse = (res) => {
+export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
