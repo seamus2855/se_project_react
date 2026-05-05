@@ -1,4 +1,4 @@
-import { checkResponse, baseUrl } from "./api";
+import { checkResponse, baseUrl } from "./Api";
 
 // Added export so you can reuse this helper elsewhere if needed
 export function request(url, options) {

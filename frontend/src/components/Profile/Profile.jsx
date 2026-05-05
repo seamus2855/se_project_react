@@ -12,7 +12,7 @@ function Profile({
   onEditProfileClick,
   onLogout,
 }) {
-  const { currentUser } = useContext(CurrentUserContext); // 3. Get the current user
+  const currentUser = useContext(CurrentUserContext); // 3. Get the current user
 
   // 4. Filter items so you only see YOUR items on the profile
   const userItems = clothingItems.filter((item) => {

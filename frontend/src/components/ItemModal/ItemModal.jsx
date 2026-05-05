@@ -7,7 +7,7 @@ import { useForm } from "../../hooks/useForm";
 
 function ItemModal({ isOpen, onCloseModal, card, onDeleteItem }) {
   // FIX: Destructure currentUser from the context object
-  const { currentUser } = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   
   const [isConfirming, setIsConfirming] = useState(false);
 

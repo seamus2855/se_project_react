@@ -20,7 +20,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { coordinates, APIKey } from "../../utils/constants";
-import { getItems, addCard, removeCard, addCardLike, removeCardLike } from "../../utils/api";
+import { getItems, addCard, removeCard, addCardLike, removeCardLike } from "../../utils/Api";
 
 const App = () => {
   const navigate = useNavigate();

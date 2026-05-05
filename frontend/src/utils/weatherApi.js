@@ -1,4 +1,4 @@
-import { checkResponse } from "./api";
+import { checkResponse } from "./Api";
 
 /**
  * Fetches weather data and uses checkResponse to validate the result.
@@ -6,7 +6,7 @@ import { checkResponse } from "./api";
 export const getWeather = ({ latitude, longitude }, apiKey) => {
   // FIXED: Corrected the endpoint URL, added 'lat=' parameter, and ensured 'api.' subdomain
   return fetch(
-    `https://openweathermap.org{latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`
+    `https://openweathermap.org${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`,
   ).then(checkResponse);
 };
 
@@ -18,7 +18,7 @@ export const filterWeatherData = (data) => {
 
   const result = {};
   result.city = data.name;
-  
+
   // Temperature calculations
   const tempF = Math.round(data.main.temp);
   result.temp = {
@@ -27,24 +27,24 @@ export const filterWeatherData = (data) => {
   };
 
   result.type = getWeatherType(result.temp.F);
-  
+
   // Use the main weather condition string
   result.condition = data.weather[0].main.toLowerCase();
-  
+
   // Pass sys data or an empty object to avoid errors
   result.isDay = isDay(data.sys || {}, Date.now());
-  
+
   return result;
 };
 
 const isDay = ({ sunrise, sunset }, now) => {
   // Default to true if solar data is missing
   if (!sunrise || !sunset) return true;
-  
+
   // OpenWeather provides Unix timestamps (seconds); Date.now() is milliseconds
   const sunriseMs = sunrise * 1000;
   const sunsetMs = sunset * 1000;
-  
+
   return now > sunriseMs && now < sunsetMs;
 };
 
