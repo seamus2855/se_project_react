@@ -6,7 +6,7 @@ import { checkResponse } from "./Api";
 export const getWeather = ({ latitude, longitude }, apiKey) => {
   // FIXED: Corrected the endpoint URL, added 'lat=' parameter, and ensured 'api.' subdomain
   return fetch(
-    `https://openweathermap.org${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`,
+  `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`
   ).then(checkResponse);
 };
 

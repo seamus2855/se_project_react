@@ -21,7 +21,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = (e) => {
     e.stopPropagation(); // Prevents opening the modal when liking
-    onCardLike(item, isLiked);
+    onCardLike({ id: item._id, isLiked });
   };
 
   return (

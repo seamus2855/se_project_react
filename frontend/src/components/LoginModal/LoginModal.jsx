@@ -17,7 +17,7 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal, onRegisterClick }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(values);
+  onLogin(values.email, values.password);
   };
 
   return (

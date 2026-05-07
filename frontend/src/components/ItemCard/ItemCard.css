@@ -20,17 +20,43 @@
 
 /* Like Button States - Verify these file paths */
 .item-card__like-btn_inactive {
-  background-image: url("../../images/like-inactive.svg");
+  background-image: url("../../assets/light-heart-sprint-14.svg");
 }
 
 .item-card__like-btn_active {
-  background-image: url("../../images/like-active.svg");
+  background-image: url("../../assets/colored-heart.svg");
 }
 
 /* Card Header Fix */
 .item-card__header {
   display: flex;
-  justify-content: space-between;
-  align-items: center; /* Vertically centers the name and heart icon */
-  padding: 12px 0;
+  justify-content: center;
+  align-items: center; 
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+.item-card {
+  position: relative;
+  width: 328px;
+  height: 328px;
+  border-radius: 19px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.item-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-card__name {
+  padding: 2px 12px;
+  border-radius: 4px;
+  background-color: #fff;
 }
