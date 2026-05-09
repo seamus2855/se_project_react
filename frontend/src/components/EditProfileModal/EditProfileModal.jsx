@@ -1,28 +1,33 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
+// 1. Correct import for your custom useForm hook (adjust path as needed)
+import { useForm } from "../../hooks/useForm"; 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const EditProfileModal = ({ isOpen, onUpdateUser, onCloseModal, isLoading }) => {
-  // FIX: Destructure currentUser from context object
-  const currentUser = useContext(CurrentUserContext);
-  
-   const { values, handleChange, setValues } = useForm({
-      name: "",
-      imageUrl: "",
-      weather: "",
-    });
-  const [avatar, setAvatar] = useState("");
+  // 2. Properly destructure currentUser from context
+  const { currentUser } = useContext(CurrentUserContext);
 
+  // 3. Initialize useForm with the correct initial state object
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    avatar: "",
+  });
+
+  // 4. Use setValues from useForm to populate fields when modal opens
   useEffect(() => {
     if (isOpen && currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+      setValues({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
     }
-  }, [isOpen, currentUser]);
+  }, [isOpen, currentUser, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser({ name, avatar });
+    // Pass the consolidated values object to your update function
+    onUpdateUser(values);
   };
 
   return (
@@ -42,8 +47,9 @@ const EditProfileModal = ({ isOpen, onUpdateUser, onCloseModal, isLoading }) => 
           className="modal__input"
           placeholder="Name"
           required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          // 5. Bind value and onChange to the hook's state
+          value={values.name}
+          onChange={handleChange}
         />
       </label>
       <label className="modal__label">
@@ -54,12 +60,11 @@ const EditProfileModal = ({ isOpen, onUpdateUser, onCloseModal, isLoading }) => 
           className="modal__input"
           placeholder="Avatar URL"
           required
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
+          // 6. Bind value and onChange to the hook's state
+          value={values.avatar}
+          onChange={handleChange}
         />
       </label>
-      
-      {/* The Submit button is handled by ModalWithForm wrapper */}
     </ModalWithForm>
   );
 };
