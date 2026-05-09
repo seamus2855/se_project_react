@@ -28,93 +28,88 @@ import {
   removeCardLike,
 } from "../../utils/Api";
 
-// ... (keep all imports same)
+// ... (all your imports remain the same)
 
 const App = () => {
-  // ... (keep all state and handlers same)
+  // 1. ADD THE MISSING STATE DECLARATION HERE
+  const [currentUser, setCurrentUser] = useState(null); 
+  
+  // (Keep your existing states and handlers, e.g.,)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [activeModal, setActiveModal] = useState("");
+  // ... rest of your state
 
   return (
-    /* FIX: Pass an object { currentUser } instead of just the user state */
     <CurrentUserContext.Provider value={{ currentUser }}>
-      <CurrentTemperatureUnitContext.Provider
+      <CurrentTemperatureUnitContext.Provider 
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="page">
           <div className="page__content">
-            <Header
-              handleAddClick={handleAddClick}
-              onRegisterClick={handleRegisterClick}
-              onLoginClick={handleLoginClick}
-              isLoggedIn={isLoggedIn}
-              weatherData={weatherData}
+            <Header 
+              handleAddClick={handleAddClick} 
+              onRegisterClick={handleRegisterClick} 
+              onLoginClick={handleLoginClick} 
+              isLoggedIn={isLoggedIn} 
+              weatherData={weatherData} 
             />
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Main
-                    weatherData={weatherData}
-                    onCardClick={handleCardClick}
-                    clothingItems={clothingItems}
-                    onCardLike={handleCardLike}
+              <Route path="/" element={
+                <Main 
+                  weatherData={weatherData} 
+                  onCardClick={handleCardClick} 
+                  clothingItems={clothingItems} 
+                  onCardLike={handleCardLike} 
+                />
+              } />
+              <Route path="/profile" element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile 
+                    clothingItems={clothingItems} 
+                    onAddClick={handleAddClick} 
+                    onCardClick={handleCardClick} 
+                    onCardLike={handleCardLike} 
+                    onLogout={handleLogout} 
+                    onEditProfileClick={handleEditProfileClick} 
                   />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
-                    <Profile
-                      clothingItems={clothingItems}
-                      onAddClick={handleAddClick}
-                      onCardClick={handleCardClick}
-                      onCardLike={handleCardLike}
-                      onLogout={handleLogout}
-                      onEditProfileClick={handleEditProfileClick}
-                    />
-                  </ProtectedRoute>
-                }
-              />
+                </ProtectedRoute>
+              } />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             <Footer />
           </div>
 
-          <AddItemModal
-            isOpen={activeModal === "add-garment"}
-            onCloseModal={closeActiveModal}
-            onAddItem={handleAddItemSubmit}
-            isLoading={isLoading}
+          <AddItemModal 
+            isOpen={activeModal === "add-garment"} 
+            onCloseModal={closeActiveModal} 
+            onAddItem={handleAddItemSubmit} 
+            isLoading={isLoading} 
           />
-
-          <ItemModal
-            isOpen={activeModal === "preview"}
-            card={selectedCard}
-            onCloseModal={closeActiveModal}
-            onDeleteItem={handleDeleteItem}
+          <ItemModal 
+            isOpen={activeModal === "preview"} 
+            card={selectedCard} 
+            onCloseModal={closeActiveModal} 
+            onDeleteItem={handleDeleteItem} 
           />
-
-          <EditProfileModal
-            isOpen={activeModal === "edit-profile"}
-            onUpdateUser={handleUpdateUser}
-            onCloseModal={closeActiveModal}
-            isLoading={isLoading}
+          <EditProfileModal 
+            isOpen={activeModal === "edit-profile"} 
+            onUpdateUser={handleUpdateUser} 
+            onCloseModal={closeActiveModal} 
+            isLoading={isLoading} 
           />
-
-          <RegisterModal
-            isOpen={activeModal === "register"}
-            handleRegistration={handleRegistration}
-            onClose={closeActiveModal}
-            onLoginClick={handleLoginClick}
-            isLoading={isLoading}
+          <RegisterModal 
+            isOpen={activeModal === "register"} 
+            handleRegistration={handleRegistration} 
+            onClose={closeActiveModal} 
+            onLoginClick={handleLoginClick} 
+            isLoading={isLoading} 
           />
-
-          <LoginModal
-            isOpen={activeModal === "login"}
-            onLogin={handleAuthorization}
-            onCloseModal={closeActiveModal}
-            onRegisterClick={handleRegisterClick}
-            isLoading={isLoading}
+          <LoginModal 
+            isOpen={activeModal === "login"} 
+            onLogin={handleAuthorization} 
+            onCloseModal={closeActiveModal} 
+            onRegisterClick={handleRegisterClick} 
+            isLoading={isLoading} 
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>
