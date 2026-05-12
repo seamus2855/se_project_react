@@ -63,25 +63,79 @@ const App = () => {
   const closeActiveModal = () => setActiveModal("");
 
   // Placeholders for your API logic
-  const handleAddItemSubmit = (item) => {
-    /* logic here */
+   const handleAddItemSubmit = (item) => {
+    setIsLoading(true);
+    addCard(item)
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
+  // ... inside your App component ...
+
   const handleRegistration = (data) => {
-    /* logic here */
+    setIsLoading(true);
+    auth.register(data)
+      .then(() => {
+        // After successful registration, log them in automatically
+        handleAuthorization({ email: data.email, password: data.password });
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
+
   const handleAuthorization = (data) => {
-    /* logic here */
+    setIsLoading(true);
+    auth.authorize(data.email, data.password)
+      .then((res) => {
+        // 1. Save the token
+        localStorage.setItem("jwt", res.token);
+        // 2. Set the login state
+        setIsLoggedIn(true);
+        // 3. You should ideally fetch the user info here or in a useEffect
+        // setCurrentUser(res.user); 
+        
+        // 4. Close the modal!
+        closeActiveModal();
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
+
+// ...
   const handleUpdateUser = (data) => {
-    /* logic here */
+    setIsLoading(true);
+    auth.updateUser(data) // Assuming this utility exists
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeActiveModal();
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
-  const handleDeleteItem = (card) => {
-    /* logic here */
+const handleDeleteItem = (card) => {
+    removeCard(card._id)
+      .then(() => {
+        setClothingItems((items) => items.filter((item) => item._id !== card._id));
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
-  const handleCardLike = (card) => {
-    /* logic here */
+
+ const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    (!isLiked ? addCardLike(id, token) : removeCardLike(id, token))
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === id ? updatedCard : item))
+        );
+      })
+      .catch(console.error);
   };
-  const handleLogout = () => {
+ const handleLogout = () => {
+    localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
   };
@@ -95,6 +149,20 @@ const App = () => {
       })
       .catch(console.error);
   }, []);
+  useEffect(() => {
+  const jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    auth.checkToken(jwt)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setCurrentUser(res); // Assuming res contains user data
+      })
+      .catch((err) => {
+        console.error("Token validation failed:", err);
+        localStorage.removeItem("jwt");
+      });
+  }
+}, []);
 
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>
@@ -171,7 +239,7 @@ const App = () => {
             isOpen={activeModal === "login"}
             onLogin={handleAuthorization}
             onCloseModal={closeActiveModal}
-            onRegisterClick={handleRegisterClick}
+            onRegisterClick={handleRegisterClick} // This MUST match the prop name in RegisterModal
             isLoading={isLoading}
           />
         </div>

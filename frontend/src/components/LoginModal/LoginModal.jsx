@@ -16,9 +16,9 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal, onRegisterClick }) => {
   }, [isOpen, setValues]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-  onLogin(values.email, values.password);
-  };
+  e.preventDefault();
+ onLogin({ email: values.email, password: values.password });  // This triggers handleAuthorization in App.js
+};
 
   return (
     <ModalWithForm

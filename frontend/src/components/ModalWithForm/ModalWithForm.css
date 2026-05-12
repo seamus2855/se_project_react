@@ -84,11 +84,13 @@
   color: rgba(0, 0, 0, 0.3);
 }
 
+/* ... (Keep all your existing code until the submit container) ... */
+
 /* Submit and Redirect Buttons Container */
 .modal__submit-container {
   display: flex;
-  align-items: center;
-  gap: 16px; /* Horizontal gap between primary and secondary buttons */
+  align-items: center; /* This vertically aligns the button and the link text */
+  gap: 16px; 
   margin-top: 20px;
 }
 
@@ -102,15 +104,20 @@
   font-size: 18px;
   line-height: 22px;
   cursor: pointer;
+  transition: opacity 0.2s ease; /* Added for smoother hover */
 }
 
-.modal__submit:hover {
-  opacity: 0.8;
-}
-
-.modal__submit:disabled {
-  background-color: rgba(0, 0, 0, 0.3);
+/* Added specific styling for the 'Saving...' or Disabled state */
+.modal__submit:disabled,
+.modal__submit[disabled] {
+  background-color: #ccc;
+  color: #7d7d7d;
   cursor: not-allowed;
+  opacity: 1; /* Override hover opacity when disabled */
+}
+
+.modal__submit:hover:not(:disabled) {
+  opacity: 0.8;
 }
 
 /* Secondary/Redirect Button Styling */
@@ -122,10 +129,20 @@
   font-size: 16px;
   line-height: 20px;
   cursor: pointer;
-  color: #0049ff; /* Standard project blue for links */
+  color: #0049ff;
   text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
 .modal__redirect-button:hover {
   opacity: 0.6;
+}
+
+/* Responsive fix for very small screens */
+@media (max-width: 400px) {
+  .modal__submit-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }

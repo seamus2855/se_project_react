@@ -1,9 +1,8 @@
 import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useForm } from "../../hooks/useForm"; // Adjust path as needed
+import { useForm } from "../../hooks/useForm";
 
-function RegisterModal({ isOpen, handleRegistration, onClose, openLoginModal }) {
-  // Use the hook for all inputs
+function RegisterModal({ isOpen, handleRegistration, onClose, onLoginClick }) {
   const { values, handleChange } = useForm({
     email: "",
     password: "",
@@ -71,11 +70,10 @@ function RegisterModal({ isOpen, handleRegistration, onClose, openLoginModal }) 
         />
       </label>
       
-      {/* The 2nd button according to design */}
       <button 
         type="button" 
         className="modal__redirect-button" 
-        onClick={openLoginModal}
+        onClick={onLoginClick} 
       >
         or Log in
       </button>
