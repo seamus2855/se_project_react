@@ -16,9 +16,9 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal, onRegisterClick }) => {
   }, [isOpen, setValues]);
 
   const handleSubmit = (e) => {
-  e.preventDefault();
- onLogin({ email: values.email, password: values.password });  // This triggers handleAuthorization in App.js
-};
+    e.preventDefault();
+    onLogin({ email: values.email, password: values.password }); // This triggers handleAuthorization in App.js
+  };
 
   return (
     <ModalWithForm
@@ -27,7 +27,16 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal, onRegisterClick }) => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onSubmit={handleSubmit}
-      name="login"
+      isLoading={isLoading}
+      secondaryButton={
+        <button
+          type="button"
+          className="modal__redirect-button"
+          onClick={onRegisterClick}
+        >
+          or Register
+        </button>
+      }
     >
       <label className="modal__label">
         Email
@@ -53,16 +62,6 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal, onRegisterClick }) => {
           onChange={handleChange}
         />
       </label>
-      
-      {/* Grouping buttons: The submit button is typically inside ModalWithForm,
-          so this secondary button appears immediately after it. */}
-      <button 
-        type="button" 
-        className="modal__redirect-button" 
-        onClick={onRegisterClick}
-      >
-        or Register
-      </button>
     </ModalWithForm>
   );
 };

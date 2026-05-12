@@ -41,12 +41,13 @@
   width: 24px;
   height: 24px;
   border: none;
-  background: url("../../assets/close-button.svg") center no-repeat;
+  /* Ensure this path correctly leads to your assets folder */
+  background: url("../../assets/close-button.svg") center no-repeat; 
   background-size: contain;
   cursor: pointer;
   padding: 0;
+  z-index: 10; /* Ensures it's not buried under the form content */
 }
-
 /* Form Layout */
 .modal__form {
   display: flex;

@@ -2,7 +2,7 @@ import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
-function RegisterModal({ isOpen, handleRegistration, onClose, onLoginClick }) {
+function RegisterModal({ isOpen, handleRegistration, onClose, onLoginClick, isLoading }) {
   const { values, handleChange } = useForm({
     email: "",
     password: "",
@@ -22,6 +22,17 @@ function RegisterModal({ isOpen, handleRegistration, onClose, onLoginClick }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      /* FIX: Move the button to the secondaryButton prop */
+      secondaryButton={
+        <button
+          type="button"
+          className="modal__redirect-button"
+          onClick={onLoginClick}
+        >
+          or Log in
+        </button>
+      }
     >
       <label className="modal__label">
         Email*
@@ -69,14 +80,6 @@ function RegisterModal({ isOpen, handleRegistration, onClose, onLoginClick }) {
           onChange={handleChange}
         />
       </label>
-      
-      <button 
-        type="button" 
-        className="modal__redirect-button" 
-        onClick={onLoginClick} 
-      >
-        or Log in
-      </button>
     </ModalWithForm>
   );
 }
