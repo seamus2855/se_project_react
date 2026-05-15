@@ -27,7 +27,6 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal, onRegisterClick }) => {
       isOpen={isOpen}
       onClose={onCloseModal}
       onSubmit={handleSubmit}
-      isLoading={isLoading}
       secondaryButton={
         <button
           type="button"

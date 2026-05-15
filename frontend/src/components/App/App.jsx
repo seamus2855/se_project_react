@@ -63,7 +63,7 @@ const App = () => {
   const closeActiveModal = () => setActiveModal("");
 
   // Placeholders for your API logic
-   const handleAddItemSubmit = (item) => {
+  const handleAddItemSubmit = (item) => {
     setIsLoading(true);
     addCard(item)
       .then((newItem) => {
@@ -77,7 +77,8 @@ const App = () => {
 
   const handleRegistration = (data) => {
     setIsLoading(true);
-    auth.register(data)
+    auth
+      .register(data)
       .then(() => {
         // After successful registration, log them in automatically
         handleAuthorization({ email: data.email, password: data.password });
@@ -88,15 +89,16 @@ const App = () => {
 
   const handleAuthorization = (data) => {
     setIsLoading(true);
-    auth.authorize(data.email, data.password)
+    auth
+      .authorize(data.email, data.password)
       .then((res) => {
         // 1. Save the token
         localStorage.setItem("jwt", res.token);
         // 2. Set the login state
         setIsLoggedIn(true);
         // 3. You should ideally fetch the user info here or in a useEffect
-        // setCurrentUser(res.user); 
-        
+        // setCurrentUser(res.user);
+
         // 4. Close the modal!
         closeActiveModal();
       })
@@ -104,10 +106,11 @@ const App = () => {
       .finally(() => setIsLoading(false));
   };
 
-// ...
+  // ...
   const handleUpdateUser = (data) => {
     setIsLoading(true);
-    auth.updateUser(data) // Assuming this utility exists
+    auth
+      .updateUser(data.name, data.avatar, token)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
         closeActiveModal();
@@ -115,26 +118,28 @@ const App = () => {
       .catch(console.error)
       .finally(() => setIsLoading(false));
   };
-const handleDeleteItem = (card) => {
+  const handleDeleteItem = (card) => {
     removeCard(card._id)
       .then(() => {
-        setClothingItems((items) => items.filter((item) => item._id !== card._id));
+        setClothingItems((items) =>
+          items.filter((item) => item._id !== card._id),
+        );
         closeActiveModal();
       })
       .catch(console.error);
   };
 
- const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     (!isLiked ? addCardLike(id, token) : removeCardLike(id, token))
       .then((updatedCard) => {
         setClothingItems((cards) =>
-          cards.map((item) => (item._id === id ? updatedCard : item))
+          cards.map((item) => (item._id === id ? updatedCard : item)),
         );
       })
       .catch(console.error);
   };
- const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
@@ -150,19 +155,20 @@ const handleDeleteItem = (card) => {
       .catch(console.error);
   }, []);
   useEffect(() => {
-  const jwt = localStorage.getItem("jwt");
-  if (jwt) {
-    auth.checkToken(jwt)
-      .then((res) => {
-        setIsLoggedIn(true);
-        setCurrentUser(res); // Assuming res contains user data
-      })
-      .catch((err) => {
-        console.error("Token validation failed:", err);
-        localStorage.removeItem("jwt");
-      });
-  }
-}, []);
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then((res) => {
+          setIsLoggedIn(true);
+          setCurrentUser(res); // Assuming res contains user data
+        })
+        .catch((err) => {
+          console.error("Token validation failed:", err);
+          localStorage.removeItem("jwt");
+        });
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={{ currentUser }}>
