@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
       minlength: 2,
       maxlength: 30,
     },
-
     avatar: {
       type: String,
       required: true,
@@ -19,7 +18,6 @@ const userSchema = new mongoose.Schema(
         message: "Avatar must be a valid URL",
       },
     },
-
     email: {
       type: String,
       required: true,
@@ -29,7 +27,6 @@ const userSchema = new mongoose.Schema(
         message: "Email must be a valid email address",
       },
     },
-
     password: {
       type: String,
       required: true,
@@ -42,13 +39,11 @@ const userSchema = new mongoose.Schema(
 // STATIC METHOD — required for login
 userSchema.statics.findUserByCredentials = async function (email, password) {
   const user = await this.findOne({ email }).select("+password");
-
   if (!user) {
     throw new Error("Incorrect email or password");
   }
 
   const matched = await bcrypt.compare(password, user.password);
-
   if (!matched) {
     throw new Error("Incorrect email or password");
   }
@@ -56,4 +51,5 @@ userSchema.statics.findUserByCredentials = async function (email, password) {
   return user;
 };
 
-module.exports = mongoose.model("User", userSchema);
+// FIX: Changed model name from "User" to "user" to match clothingItems schema reference
+module.exports = mongoose.model("user", userSchema);

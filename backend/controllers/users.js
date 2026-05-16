@@ -14,34 +14,27 @@ const { JWT_SECRET } = require("../utils/config");
 exports.createUser = async (req, res) => {
   try {
     const { email, password, ...rest } = req.body;
-
     if (!email || !password) {
       return res
         .status(BAD_REQUEST)
         .json({ message: "Email and password are required" });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = await User.create({
       email,
       password: hashedPassword,
       ...rest,
     });
-
     const userObj = newUser.toObject();
     delete userObj.password;
-
     return res.status(201).json(userObj);
   } catch (err) {
     if (err.code === 11000) {
       return res.status(CONFLICT).json({ message: "Email already exists" });
     }
-
     if (err.name === "ValidationError" || err.name === "CastError") {
       return res.status(BAD_REQUEST).json({ message: "Invalid data" });
     }
-
     return res
       .status(INTERNAL_SERVER_ERROR)
       .json({ message: "An error has occurred on the server." });
@@ -52,7 +45,6 @@ exports.createUser = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     // Validate required fields
     if (!email || !password) {
       return res
@@ -61,19 +53,25 @@ exports.login = async (req, res) => {
     }
 
     const user = await User.findUserByCredentials(email, password);
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" });
 
-    const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-      expiresIn: "7d",
+    // FIX: Send the user details (name, avatar, email) alongside the token
+    // This allows React to instantly render the profile and avatar
+    return res.status(200).json({
+      token,
+      user: {
+        _id: user._id,
+        name: user.name,
+        avatar: user.avatar,
+        email: user.email,
+      },
     });
-
-    return res.status(200).json({ token });
   } catch (err) {
     if (err.message === "Incorrect email or password") {
       return res
         .status(UNAUTHORIZED)
         .json({ message: "Incorrect email or password" });
     }
-
     return res
       .status(INTERNAL_SERVER_ERROR)
       .json({ message: "An error has occurred on the server." });
@@ -83,12 +81,10 @@ exports.login = async (req, res) => {
 // GET /users/me — get current user
 exports.getCurrentUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
-
+    const user = await User.findById(req.user._id).select("-password");
     if (!user) {
       return res.status(NOT_FOUND).json({ message: "User not found" });
     }
-
     return res.json(user);
   } catch (err) {
     return res
@@ -101,23 +97,21 @@ exports.getCurrentUser = async (req, res) => {
 exports.updateCurrentUser = async (req, res) => {
   try {
     const { name, avatar } = req.body;
-
+    // FIX: { new: true } guarantees Mongoose returns the NEW, updated data
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       { name, avatar },
       { new: true, runValidators: true },
-    );
+    ).select("-password");
 
     if (!updatedUser) {
       return res.status(NOT_FOUND).json({ message: "User not found" });
     }
-
     return res.json(updatedUser);
   } catch (err) {
     if (err.name === "ValidationError" || err.name === "CastError") {
       return res.status(BAD_REQUEST).json({ message: "Invalid data" });
     }
-
     return res
       .status(INTERNAL_SERVER_ERROR)
       .json({ message: "An error has occurred on the server." });
