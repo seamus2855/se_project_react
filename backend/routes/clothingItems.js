@@ -2,8 +2,8 @@ const express = require("express");
 const clothingItems = require("../controllers/clothingItems");
 const router = express.Router();
 
-// FIX: Added GET route to fetch all clothing items so they render on the frontend
-router.get("/", clothingItems.getItems);
+// FIX: Changed from getItems to getClothingItems to match your controller naming convention
+router.get("/", clothingItems.getClothingItems);
 
 // Base item routes
 router.post("/", clothingItems.create);
