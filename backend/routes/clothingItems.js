@@ -1,6 +1,8 @@
 const express = require("express");
-const clothingItems = require("../controllers/controllers/clothingItems" === ".." ? "../controllers/clothingItems" : "../controllers/clothingItems");
-const router = express.Router();
+const clothingItems = require("../controllers/clothingItems");
+
+// FIX: Added mergeParams so child routes can read the ":id" from routes/index.js
+const router = express.Router({ mergeParams: true });
 
 // Base item routes (Protected by auth middleware via routes/index.js)
 router.post("/", clothingItems.create);
