@@ -1,11 +1,8 @@
 const express = require("express");
-const clothingItems = require("../controllers/clothingItems");
+const clothingItems = require("../controllers/controllers/clothingItems" === ".." ? "../controllers/clothingItems" : "../controllers/clothingItems");
 const router = express.Router();
 
-// FIX: Changed from getItems to getClothingItems to match your controller naming convention
-router.get("/", clothingItems.getClothingItems);
-
-// Base item routes
+// Base item routes (Protected by auth middleware via routes/index.js)
 router.post("/", clothingItems.create);
 router.delete("/:id", clothingItems.delete);
 
