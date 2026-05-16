@@ -1,17 +1,15 @@
-const router = require("express").Router();
-const auth = require("../middlewares/auth");
-const userRouter = require("./users");
-const itemsRouter = require("./clothingItems"); // Ensure path is correct
-const { login, createUser } = require("../controllers/users");
-const { getAll } = require("../controllers/clothingItems");
+const express = require("express");
+const clothingItems = require("../controllers/clothingItems");
 
-// Public routes
-router.post("/signin", login);
-router.post("/signup", createUser);
-router.get("/items", getAll); // This handles the initial public fetch
+// FIX: Added mergeParams: true so item IDs pass cleanly from routes/index.js to controllers
+const router = express.Router({ mergeParams: true });
 
-// Protected routes
-router.use("/users", auth, userRouter);
-router.use("/items", auth, itemsRouter); // This handles POST/DELETE/LIKE
+// Base item routes
+router.post("/", clothingItems.create);
+router.delete("/:id", clothingItems.delete);
+
+// Like / Unlike routes
+router.put("/:id/likes", clothingItems.likeItem);
+router.delete("/:id/likes", clothingItems.unlikeItem);
 
 module.exports = router;
