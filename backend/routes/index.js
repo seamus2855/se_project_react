@@ -5,7 +5,7 @@ const clothingItemsRouter = require("./clothingItems"); // FIX: Corrected import
 
 // Controllers for public handlers
 const { login, createUser } = require("../controllers/users");
-const { getItems } = require("../controllers/clothingItems"); // FIX: Matches your main item fetching method name
+const { getItems, getAll } = require("../controllers/clothingItems"); // FIX: Matches your main item fetching method name
 
 // ==========================================
 // 1. PUBLIC ENDPOINTS (No token required)
@@ -15,7 +15,7 @@ router.post("/signup", createUser);
 
 // FIX: Mount the public GET /items route BEFORE auth middleware 
 // This resolves the 401 Unauthorized crash on application page load
-router.get("/items", getItems);
+router.get("/items", getAll);
 
 // ==========================================
 // 2. PROTECTED ENDPOINTS (Requires valid token)
