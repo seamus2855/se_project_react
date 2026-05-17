@@ -36,14 +36,9 @@ const userSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-// STATIC METHOD — required for login
-// FIX: Named the function "findUserByCredentials" right after the function keyword
+// STATIC METHOD — required for login 
 userSchema.statics.findUserByCredentials = async function findUserByCredentials(email, password) {
-  const user = await this.findOne({ email }).select("+password");
-  if (!user) {
-    throw new Error("Incorrect email or password");
-  }
-  // ... rest of the code remains exactly the same
+  // FIXED: Removed the secondary duplicated code snippet from this block
   const user = await this.findOne({ email }).select("+password");
   if (!user) {
     throw new Error("Incorrect email or password");
