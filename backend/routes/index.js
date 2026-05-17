@@ -1,11 +1,26 @@
-const express = require("express");
-
+const router = require("express").Router();
+const auth = require("../middlewares/auth");
 const usersRouter = require("./users");
-const itemsRouter = require("./items");
+const clothingItemsRouter = require("./clothingItems"); // FIX: Corrected import name to match clothingItems.js file name
 
-const router = express.Router();
+// Controllers for public handlers
+const { login, createUser } = require("../controllers/users");
+const { getItems } = require("../controllers/clothingItems"); // FIX: Matches your main item fetching method name
 
-router.use("/users", usersRouter);
-router.use("/items", itemsRouter);
+// ==========================================
+// 1. PUBLIC ENDPOINTS (No token required)
+// ==========================================
+router.post("/signin", login);
+router.post("/signup", createUser);
+
+// FIX: Mount the public GET /items route BEFORE auth middleware 
+// This resolves the 401 Unauthorized crash on application page load
+router.get("/items", getItems);
+
+// ==========================================
+// 2. PROTECTED ENDPOINTS (Requires valid token)
+// ==========================================
+router.use("/users", auth, usersRouter);
+router.use("/items", auth, clothingItemsRouter); // Handles protected operations like POST/DELETE/LIKE
 
 module.exports = router;
