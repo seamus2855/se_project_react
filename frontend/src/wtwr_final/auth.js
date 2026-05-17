@@ -1,37 +1,48 @@
-export const register = (name, avatar, email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+import { checkResponse, baseUrl } from "./Api";
+
+const BASE_URL = baseUrl || "http://localhost:3001";
+
+export function request(url, options) {
+  return fetch(url, options).then(checkResponse);
+}
+
+export const register = ({ name, avatar, email, password }) => {
+  return request(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 };
 
 export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return request(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 };
 
-import { Navigate } from "react-router-dom";
+export const checkToken = (token) => {
+  return request(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-function ProtectedRoute({ children, isLoggedIn }) {
-  if (!isLoggedIn) {
-    // If not logged in, redirect to the main page
-    return <Navigate to="/" replace />;
-  }
-
-  // If logged in, render the profile component
-  return children;
-}
-
-export default ProtectedRoute;
+export const updateUser = (name, avatar, token) => {
+  return request(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
+};
