@@ -1,5 +1,6 @@
 const errorHandler = (err, req, res, next) => {
   // 1. Log the error to the console for debugging
+  // eslint-disable-next-line no-console
   console.error(err);
 
   // 2. Destructure statusCode and message from the error object
@@ -9,10 +10,11 @@ const errorHandler = (err, req, res, next) => {
   // 3. Send the response
   res.status(statusCode).send({
     // If it's a 500 error, don't leak sensitive server details to the user
-    message: statusCode === 500 
-      ? "An error occurred on the server" 
-      : message,
+    message: statusCode === 500 ? "An error occurred on the server" : message,
   });
+  
+  // eslint-disable-next-line no-unused-vars
+  const ignoreNext = next; // Explicitly references next to satisfy strict lint parameters
 };
 
 module.exports = errorHandler;
