@@ -1,15 +1,11 @@
 const express = require("express");
-const clothingItems = require("../controllers/clothingItems");
 
-// FIX: Added mergeParams: true so item IDs pass cleanly from routes/index.js to controllers
-const router = express.Router({ mergeParams: true });
+const usersRouter = require("./users");
+const itemsRouter = require("./items");
 
-// Base item routes
-router.post("/", clothingItems.create);
-router.delete("/:id", clothingItems.delete);
+const router = express.Router();
 
-// Like / Unlike routes
-router.put("/:id/likes", clothingItems.likeItem);
-router.delete("/:id/likes", clothingItems.unlikeItem);
+router.use("/users", usersRouter);
+router.use("/items", itemsRouter);
 
 module.exports = router;

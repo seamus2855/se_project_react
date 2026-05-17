@@ -13,7 +13,7 @@ router.get("/", clothingItems.getAll);
 // Create a new item
 router.post("/", clothingItems.create);
 
-// Delete an item (with ownership check inside controller)
+// Delete an item
 router.delete("/:id", clothingItems.delete);
 
 // Like / Unlike routes
