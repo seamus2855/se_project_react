@@ -1,29 +1,37 @@
-.sidebar__profile {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  gap: 16px;
-  padding: 20px;
-}
+.sidebar__profile { 
+  display: flex; 
+  /* 1. Changed to standard row so avatar sits cleanly on the left, followed by the text */
+  flex-direction: row; 
+  align-items: center; 
+  gap: 16px; 
+  padding: 20px; 
+  width: 100%;
+  box-sizing: border-box;
+} 
 
-.sidebar__avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #000;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 18px;
-  text-transform: uppercase;
-  user-select: none;
-}
+.sidebar__avatar { 
+  width: 56px; 
+  height: 56px; 
+  border-radius: 50%; 
+  background-color: #000; 
+  color: #fff; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-weight: 600; 
+  font-size: 18px; 
+  text-transform: uppercase; 
+  user-select: none; 
+  /* 2. CRITICAL: Prevents the round circle from squishing when a username is long */
+  flex-shrink: 0; 
+} 
 
-.sidebar__username {
-  font-size: 20px;
-  font-weight: 500;
-  color: #1a1a1a;
-  white-space: nowrap;
-}
+.sidebar__username { 
+  font-size: 20px; 
+  font-weight: 500; 
+  color: #1a1a1a; 
+  /* 3. Adds graceful text truncation if the username exceeds the remaining sidebar width */
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 

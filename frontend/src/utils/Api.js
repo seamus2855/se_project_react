@@ -1,7 +1,6 @@
 /* se_project_react/src/utils/api.js */
 
-// Use process.env or import.meta.env if you need to toggle between production and development
-export const baseUrl = "http://localhost:3001"; // Or "/api" if your Vite proxy is confirmed working
+export const baseUrl = "http://localhost:3001";
 
 /**
  * Validates the response status and content type.
@@ -36,8 +35,10 @@ export const addCard = ({ name, imageUrl, weather }, token) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      // Normalized authorization capitalization for consistent server reading
+      "Authorization": `Bearer ${token}`,
     },
+    // Ensure the backend expects 'imageUrl' and not 'link'
     body: JSON.stringify({ name, imageUrl, weather }),
   });
 };
@@ -47,7 +48,7 @@ export const removeCard = (cardId, token) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   });
 };
@@ -57,7 +58,7 @@ export const addCardLike = (id, token) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   });
 };
@@ -67,7 +68,7 @@ export const removeCardLike = (id, token) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
   });
 };

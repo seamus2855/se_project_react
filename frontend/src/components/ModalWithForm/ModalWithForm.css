@@ -33,20 +33,32 @@
   color: #000;
 }
 
-/* Close Button */
-.modal__close {
-  position: absolute;
-  top: 28px;
-  right: 28px;
-  width: 24px;
-  height: 24px;
-  border: none;
-  /* Ensure this path correctly leads to your assets folder */
-  background: url("../../assets/close-button.svg") center no-repeat; 
-  background-size: contain;
-  cursor: pointer;
-  padding: 0;
-  z-index: 10; /* Ensures it's not buried under the form content */
+/* Close Button */ 
+.modal__close { 
+  position: absolute; 
+  top: 28px; 
+  right: 28px; 
+  width: 24px; 
+  height: 24px; 
+  border: none; 
+  
+  /* 1. Added a fallback background color so the button bounds are visible if image fails */
+  background-color: transparent; 
+  
+  /* 2. Double-check this relative path from your current CSS file location */
+  background-image: url("../../assets/close-button.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; 
+  
+  cursor: pointer; 
+  padding: 0; 
+  
+  /* 3. Increased z-index dramatically to clear heavy frameworks/overlays */
+  z-index: 9999; 
+  
+  /* 4. Accessibility: ensures it doesn't shrink or hide in flex containers */
+  flex-shrink: 0; 
 }
 /* Form Layout */
 .modal__form {
