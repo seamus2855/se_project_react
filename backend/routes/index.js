@@ -5,7 +5,7 @@ const clothingItemsRouter = require("./clothingItems"); // FIX: Corrected import
 
 // Controllers for public handlers
 const { login, createUser } = require("../controllers/users");
-const { getItems, getAll } = require("../controllers/clothingItems"); // FIX: Matches your main item fetching method name
+const { getAll } = require("../controllers/clothingItems"); // FIX: Matches your main item fetching method name
 
 // ==========================================
 // 1. PUBLIC ENDPOINTS (No token required)
