@@ -1,29 +1,55 @@
-/* eslint-disable no-console */
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const routes = require("./routes");
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const errorHandler = require('./errorHandler');
 
-const app = express(); // Ensure this blank line above exists!
+// Import your request validation functions
+const { validateUserBody, validateUserIdParam } = require('./middleware/validation');
 
+// Import your Winston logging middlewares
+const { requestLogMiddleware, errorLogMiddleware } = require('./middleware/logger');
+
+const app = express();
+
+// 1. Security and Terminal Logging Middlewares (Must be at the top)
+app.use(helmet());
 app.use(cors());
+app.use(morgan('dev')); // Console logging for development debugging
+
+// 2. Winston File Request Logger (Must run before any routes or body parsers)
+app.use(requestLogMiddleware);
+
+// 3. Request Body Parsing Middlewares (Must be before routes)
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Mount all routes
-app.use("/", routes);
-
-// FIX: Catch-all JSON handler for missing routes
-app.use((req, res) => {
-  res.status(404).json({ message: `Route ${req.originalUrl} not found on this server.` });
+// 4. Your Application Routes
+app.get('/api/example', (req, res) => {
+  res.status(200).json({ status: 'success', message: 'Hello World' });
 });
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/wtwr_db")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
-app.listen(3001, () => {
-  console.log("Server is running on port 3001");
+// Route for creating a user with Joi/Celebrate body validation
+app.post('/api/users', validateUserBody, (req, res) => {
+  res.status(201).json({ status: 'success', data: req.body });
 });
+
+// Route for getting a single user with ID parameter validation
+app.get('/api/users/:id', validateUserIdParam, (req, res) => {
+  res.status(200).json({ status: 'success', id: req.params.id });
+});
+
+// Example route that triggers your custom error handler manually
+app.get('/api/error-test', (req, res, next) => {
+  const err = new Error('This is a test operational error');
+  err.statusCode = 400;
+  next(err);
+});
+
+// 5. Winston Error Logger (Must sit below routes to catch errors, but above errorHandler)
+app.use(errorLogMiddleware);
+
+// 6. Centralized Error Handling Middleware (Must be at the absolute bottom)
+app.use(errorHandler);
 
 module.exports = app;

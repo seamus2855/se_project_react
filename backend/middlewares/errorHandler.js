@@ -1,20 +1,29 @@
+// errorHandler.js
+const { isCelebrateError } = require('celebrate');
+
 const errorHandler = (err, req, res, next) => {
-  // 1. Log the error to the console for debugging
+  // 1. Log for developer debugging
   // eslint-disable-next-line no-console
   console.error(err);
 
-  // 2. Destructure statusCode and message from the error object
-  // If statusCode is undefined, default to 500
-  const { statusCode = 500, message } = err;
+  let statusCode = err.statusCode || 500;
+  let message = err.message;
 
-  // 3. Send the response
+  // 2. Intercept Celebrate/Joi validation errors
+  if (isCelebrateError(err)) {
+    statusCode = 400;
+    // Extract the exact validation error message from Body, Params, or Query
+    const errorBody = err.details.get('body') || err.details.get('params') || err.details.get('query');
+    message = errorBody.details.map((detail) => detail.message).join(', ');
+  }
+
+  // 3. Send response
   res.status(statusCode).send({
-    // If it's a 500 error, don't leak sensitive server details to the user
     message: statusCode === 500 ? "An error occurred on the server" : message,
   });
-  
+
   // eslint-disable-next-line no-unused-vars
-  const ignoreNext = next; // Explicitly references next to satisfy strict lint parameters
+  const ignoreNext = next;
 };
 
 module.exports = errorHandler;
