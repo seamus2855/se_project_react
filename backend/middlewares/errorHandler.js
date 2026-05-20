@@ -6,20 +6,23 @@ const errorHandler = (err, req, res, next) => {
   // eslint-disable-next-line no-console
   console.error(err);
 
-  let statusCode = err.statusCode || 500;
-  let message = err.message;
+  // FIXED: Destructure properties directly with a default value to satisfy prefer-destructuring
+  const { statusCode = 500, message } = err;
+
+  let finalStatusCode = statusCode;
+  let finalMessage = message;
 
   // 2. Intercept Celebrate/Joi validation errors
   if (isCelebrateError(err)) {
-    statusCode = 400;
+    finalStatusCode = 400;
     // Extract the exact validation error message from Body, Params, or Query
     const errorBody = err.details.get('body') || err.details.get('params') || err.details.get('query');
-    message = errorBody.details.map((detail) => detail.message).join(', ');
+    finalMessage = errorBody.details.map((detail) => detail.message).join(', ');
   }
 
   // 3. Send response
-  res.status(statusCode).send({
-    message: statusCode === 500 ? "An error occurred on the server" : message,
+  res.status(finalStatusCode).send({
+    message: finalStatusCode === 500 ? "An error occurred on the server" : finalMessage,
   });
 
   // eslint-disable-next-line no-unused-vars

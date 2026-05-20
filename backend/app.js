@@ -8,13 +8,13 @@ const errorHandler = require("./middlewares/errorHandler"); // Fixed path and ad
 const {
   validateUserBody,
   validateUserIdParam,
-} = require("./middlewares/validation.js"); // Fixed path and added extension
+} = require("./middlewares/validation"); // Fixed path and added extension
 
 // Import your Winston logging middlewares
 const {
   requestLogMiddleware,
   errorLogMiddleware,
-} = require("./middlewares/logger.js"); // Fixed path and added extension
+} = require("./middlewares/logger"); // Fixed path and added extension
 
 const app = express();
 

@@ -46,7 +46,8 @@ const errorLogMiddleware = (err, req, res, next) => {
   next(err); // Pass the error along to your centralized errorHandler
 };
 
-module = {
+// FIXED: Correctly use module.exports to avoid read-only global mutation errors
+module.exports = {
   requestLogMiddleware,
   errorLogMiddleware,
 };
