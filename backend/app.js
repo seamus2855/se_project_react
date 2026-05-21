@@ -2,26 +2,26 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const errorHandler = require("./middlewares/errorHandler"); // Fixed path and added extension
+const errorHandler = require("./middlewares/errorHandler"); 
 
 // Import your request validation functions
-const {
-  validateUserBody,
-  validateUserIdParam,
-} = require("./middlewares/validation"); // Fixed path and added extension
+const { 
+  validateUserBody, 
+  validateUserIdParam, 
+} = require("./middlewares/validation"); 
 
 // Import your Winston logging middlewares
-const {
-  requestLogMiddleware,
-  errorLogMiddleware,
-} = require("./middlewares/logger"); // Fixed path and added extension
+const { 
+  requestLogMiddleware, 
+  errorLogMiddleware, 
+} = require("./middlewares/logger"); 
 
 const app = express();
 
 // 1. Security and Terminal Logging Middlewares (Must be at the top)
 app.use(helmet());
 app.use(cors());
-app.use(morgan("dev")); // Console logging for development debugging
+app.use(morgan("dev")); 
 
 // 2. Winston File Request Logger (Must run before any routes or body parsers)
 app.use(requestLogMiddleware);
@@ -31,6 +31,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 4. Your Application Routes
+
+// CRASH TEST ROUTE (Placed before auth/user routes)
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Server will crash now');
+  }, 0);
+});
+
 app.get("/api/example", (req, res) => {
   res.status(200).json({ status: "success", message: "Hello World" });
 });
