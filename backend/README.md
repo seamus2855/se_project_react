@@ -15,3 +15,6 @@ Before committing your code, make sure you edit the file `sprint.txt` in the roo
 
 https://www.loom.com/share/8b318fbad21647a49cfd39bd309f0463
 https://www.loom.com/share/92aeb92c52884b5f99383629bfe1093d
+
+https://github.com/seamus2855/se_project_react/tree/main/frontend
+https://github.com/seamus2855/se_project_react/tree/main/backend
