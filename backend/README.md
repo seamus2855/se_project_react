@@ -2,7 +2,8 @@
 
 This project was the start of the back end of the program with using new technologies. It was to start showing how different files open up for the project. This project makes you use mongoose and express to start the project to get it running smoothly. After getting mongoose as well as using prettier the project can start running as a database.
 The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization.
-
+https://github.com/seamus2855/se_project_react/tree/main/frontend
+https://github.com/seamus2855/se_project_react/tree/main/backend
 ## Running the Project
 
 `npm run start` — to launch the server
@@ -15,6 +16,3 @@ Before committing your code, make sure you edit the file `sprint.txt` in the roo
 
 https://www.loom.com/share/8b318fbad21647a49cfd39bd309f0463
 https://www.loom.com/share/92aeb92c52884b5f99383629bfe1093d
-
-https://github.com/seamus2855/se_project_react/tree/main/frontend
-https://github.com/seamus2855/se_project_react/tree/main/backend
