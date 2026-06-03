@@ -1,19 +1,42 @@
 # WTWR (What to Wear?): Back End
 
-This project was the start of the back end of the program with using new technologies. It was to start showing how different files open up for the project. This project makes you use mongoose and express to start the project to get it running smoothly. After getting mongoose as well as using prettier the project can start running as a database.
-The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization.
+This repository contains the back-end server for the WTWR application. The project utilizes Node.js, Express, and MongoDB (via Mongoose) to build a secure API with database integration, user authorization, and robust testing.
 
-## Running the Project
+## 🚀 Live Applications
 
-`npm run start` — to launch the server
+* **Frontend Application:** [View Live Deployment](https://YOUR_FRONTEND_DEPLOYED_URL_HERE)
+* **Backend API Gateway:** [View Live API](https://YOUR_BACKEND_DEPLOYED_URL_HERE)
 
-`npm run dev` — to launch the server with the hot reload feature
+## 💻 Local Setup & Repositories
 
-### Testing
-https://github.com/seamus2855/se_project_react/tree/main/frontend
-https://github.com/seamus2855/se_project_react/tree/main/backend
+To test the application integration locally, download or clone the code for both components:
 
-Before committing your code, make sure you edit the file `sprint.txt` in the root folder. The file `sprint.txt` should contain the number of the sprint you're currently working on. For ex. 12
+* **Frontend Repository:** [Download Frontend Code](https://github.com/seamus2855/se_project_react/tree/main/frontend)
+* **Backend Repository:** [Download Backend Code](https://github.com/seamus2855/se_project_react/tree/main/backend)
 
-https://www.loom.com/share/8b318fbad21647a49cfd39bd309f0463
-https://www.loom.com/share/92aeb92c52884b5f99383629bfe1093d
+### Running the Backend Server Locally
+
+1. Install the project dependencies:
+   ```bash
+   npm install
+   ```
+2. Launch the production server:
+   ```bash
+   npm run start
+   ```
+3. Launch the development server with hot-reload:
+   ```bash
+   npm run dev
+   ```
+
+## 📝 Commit Requirements
+
+Before committing your changes, you must update the tracking file in the root folder:
+* **File:** `sprint.txt`
+* **Content:** Enter only the current sprint number (e.g., `12`).
+
+## 🎥 Video Demonstrations
+
+Review these video walkthroughs to see the project functionality in action:
+* [WTWR Feature Walkthrough 1](https://www.loom.com/share/8b318fbad21647a49cfd39bd309f0463)
+* [WTWR Feature Walkthrough 2](https://www.loom.com/share/92aeb92c52884b5f9938362

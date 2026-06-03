@@ -2,26 +2,21 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const errorHandler = require("./middlewares/errorHandler"); 
+const errorHandler = require("./middlewares/errorHandler");
 
 // Import your request validation functions
-const { 
-  validateUserBody, 
-  validateUserIdParam, 
-} = require("./middlewares/validation"); 
+const { validateUserBody, validateUserIdParam } = require("./middlewares/validation");
 
 // Import your Winston logging middlewares
-const { 
-  requestLogMiddleware, 
-  errorLogMiddleware, 
-} = require("./middlewares/logger"); 
+const { requestLogMiddleware, errorLogMiddleware } = require("./middlewares/logger");
 
 const app = express();
+const PORT = 3001; // Port configuration moved to the top
 
 // 1. Security and Terminal Logging Middlewares (Must be at the top)
 app.use(helmet());
 app.use(cors());
-app.use(morgan("dev")); 
+app.use(morgan("dev"));
 
 // 2. Winston File Request Logger (Must run before any routes or body parsers)
 app.use(requestLogMiddleware);
@@ -31,7 +26,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 4. Your Application Routes
-
 // CRASH TEST ROUTE (Placed before auth/user routes)
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -65,5 +59,10 @@ app.use(errorLogMiddleware);
 
 // 6. Centralized Error Handling Middleware (Must be at the absolute bottom)
 app.use(errorHandler);
+
+// 7. Start the server (Must be before module.exports)
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports = app;
