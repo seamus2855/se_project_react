@@ -1,25 +1,31 @@
 // middleware/logger.js
 const winston = require('winston');
 
-// Define a reusable JSON format for production tracing
+// Reusable JSON format for production tracing
 const logFormat = winston.format.combine(
   winston.format.timestamp(),
   winston.format.json()
 );
 
-// 1. Logger dedicated to recording incoming HTTP requests
+// 1. Logger dedicated ONLY to recording incoming HTTP requests
 const requestLogger = winston.createLogger({
   format: logFormat,
   transports: [
-    new winston.transports.File({ filename: 'logs/request.log' }),
+    new winston.transports.File({ 
+      filename: 'logs/request.log',
+      level: 'info' // Explicitly set level to prevent cross-logging
+    }),
   ],
 });
 
-// 2. Logger dedicated to tracking application failures
+// 2. Logger dedicated ONLY to tracking application failures
 const errorLogger = winston.createLogger({
   format: logFormat,
   transports: [
-    new winston.transports.File({ filename: 'logs/error.log' }),
+    new winston.transports.File({ 
+      filename: 'logs/error.log',
+      level: 'error' // Explicitly set level to isolate errors
+    }),
   ],
 });
 
@@ -27,26 +33,23 @@ const errorLogger = winston.createLogger({
 const requestLogMiddleware = (req, res, next) => {
   requestLogger.info({
     method: req.method,
-    url: req.originalUrl,
-    ip: req.ip,
-    timestamp: new Date().toISOString(),
+    url: req.originalUrl || req.url, // Fallback safe guard
+    ip: req.ip || req.connection.remoteAddress, // Handle proxy environments
   });
   next();
 };
 
 const errorLogMiddleware = (err, req, res, next) => {
   errorLogger.error({
-    message: err.message,
+    message: err.message || 'An unexpected error occurred',
     statusCode: err.statusCode || 500,
     stack: err.stack,
-    url: req.originalUrl,
+    url: req.originalUrl || req.url,
     method: req.method,
-    timestamp: new Date().toISOString(),
   });
-  next(err); // Pass the error along to your centralized errorHandler
+  next(err); // Pass the error along to centralized errorHandler
 };
 
-// FIXED: Correctly use module.exports to avoid read-only global mutation errors
 module.exports = {
   requestLogMiddleware,
   errorLogMiddleware,
