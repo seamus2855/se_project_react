@@ -1,30 +1,34 @@
 # WTWR (What to Wear?): Back End
 
-This repository contains the back-end server for the WTWR application. The project utilizes Node.js, Express, and MongoDB (via Mongoose) to build a secure API with database integration, user authorization, and robust testing.
+This repository contains the back-end server for the WTWR application. The project utilizes Node.js, Express, and MongoDB (via Mongoose) to build a secure API with custom error handlers, celebrate/Joi request validation, winston logging pipelines, and user authorization.
 
 ## 🚀 Live Applications
 
-* **Frontend Application:** [View Live Deployment]https://vercel.com/seamus-ryan-s-projects/se-project-react/2DMVS3dB22G86i1P18tFno6EZW6J
-* **Backend API Gateway:** [View Live API]https://dashboard.render.com/web/srv-d8gcbdmq1p3s739eigpg/deploys/dep-d8gcbduq1p3s739eih30
+* **Frontend Application:** [View Live Deployment](https://vercel.app)
+* **Backend API Gateway:** [View Live API](https://onrender.com)
 
 ## 💻 Local Setup & Repositories
 
 To test the application integration locally, download or clone the code for both components:
 
-* **Frontend Repository:** [Download Frontend Code]https://github.com/seamus2855/se_project_react
+* **Frontend Repository:** [Download Frontend Code](https://github.com/seamus2855/se_project_react)
 * **Backend Repository:** [Download Backend Code](https://github.com/seamus2855/se_project_react/tree/main/backend)
 
 ### Running the Backend Server Locally
 
-1. Install the project dependencies:
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Install the project dependencies:
    ```bash
    npm install
    ```
-2. Launch the production server:
+3. Launch the production server:
    ```bash
    npm run start
    ```
-3. Launch the development server with hot-reload:
+4. Launch the development server with hot-reload:
    ```bash
    npm run dev
    ```
