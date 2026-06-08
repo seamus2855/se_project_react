@@ -1,11 +1,17 @@
+// middleware/validation.js
 const { celebrate, Joi, Segments } = require("celebrate");
 const validator = require("validator");
 
 // Custom URL validator logic
 const validateURL = (value, helpers) => {
+  // FIXED: If the field is omitted/undefined, let Joi's optional() chain handle it
+  if (!value) {
+    return value;
+  }
+  
   return validator.isURL(value, { require_protocol: true }) 
     ? value 
-    : helpers.error("any.invalid");
+    : helpers.error("string.uri"); // Changed to string.uri to make message overrides intuitive
 };
 
 // User body schema
@@ -24,8 +30,8 @@ const validateUserBody = celebrate({
       "string.min": "Password must be at least 8 characters long",
       "any.required": "Password is required",
     }),
-    avatar: Joi.string().custom(validateURL).messages({
-      "any.invalid": "Avatar must be a valid URL",
+    avatar: Joi.string().empty("").custom(validateURL).messages({
+      "string.uri": "Avatar must be a valid URL",
     }),
   }),
 });

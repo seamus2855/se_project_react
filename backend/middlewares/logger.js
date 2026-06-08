@@ -11,10 +11,7 @@ const logFormat = winston.format.combine(
 const requestLogger = winston.createLogger({
   format: logFormat,
   transports: [
-    new winston.transports.File({ 
-      filename: 'logs/request.log',
-      level: 'info' // Explicitly set level to prevent cross-logging
-    }),
+    new winston.transports.File({ filename: 'logs/request.log', level: 'info' }),
   ],
 });
 
@@ -22,10 +19,7 @@ const requestLogger = winston.createLogger({
 const errorLogger = winston.createLogger({
   format: logFormat,
   transports: [
-    new winston.transports.File({ 
-      filename: 'logs/error.log',
-      level: 'error' // Explicitly set level to isolate errors
-    }),
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
   ],
 });
 
@@ -33,20 +27,26 @@ const errorLogger = winston.createLogger({
 const requestLogMiddleware = (req, res, next) => {
   requestLogger.info({
     method: req.method,
-    url: req.originalUrl || req.url, // Fallback safe guard
-    ip: req.ip || req.connection.remoteAddress, // Handle proxy environments
+    url: req.originalUrl || req.url,
+    ip: req.ip || (req.socket ? req.socket.remoteAddress : 'unknown'), // FIXED: Replaced deprecated req.connection
+    userAgent: req.get('User-Agent') || 'unknown', // Added for better client diagnostic tracing
   });
   next();
 };
 
 const errorLogMiddleware = (err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+
+  // Filter out 4xx errors if you only want true operational/system crashes in error.log
   errorLogger.error({
     message: err.message || 'An unexpected error occurred',
-    statusCode: err.statusCode || 500,
+    statusCode,
     stack: err.stack,
     url: req.originalUrl || req.url,
     method: req.method,
+    isCelebrate: !!err.joi || (err.meta && err.meta.isCelebrate) || false, // Tag validation errors
   });
+
   next(err); // Pass the error along to centralized errorHandler
 };
 
