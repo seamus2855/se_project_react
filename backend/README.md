@@ -11,7 +11,7 @@ This repository contains the back-end server for the WTWR application. The proje
 
 To test the application integration locally, download or clone the code for both components:
 
-* **Frontend Repository:** [Download Frontend Code](https://github.com/seamus2855/se_project_react/tree/main/frontend)
+* **Frontend Repository:** [Download Frontend Code]https://github.com/seamus2855/se_project_react
 * **Backend Repository:** [Download Backend Code](https://github.com/seamus2855/se_project_react/tree/main/backend)
 
 ### Running the Backend Server Locally
