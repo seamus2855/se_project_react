@@ -11,28 +11,25 @@ const clothingItemSchema = new Schema({
     minlength: 2,
     maxlength: 30,
   },
-
   imageUrl: {
     type: String,
     required: true,
     validate: {
-      validator: (value) => validator.isURL(value),
+      // Injects URL parameters to enforce strict string protocol checks
+      validator: (value) => validator.isURL(value, { require_protocol: true }),
       message: "Invalid image URL",
     },
   },
-
   weather: {
     type: String,
     enum: ["hot", "warm", "cold"],
     required: true,
   },
-
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",
     required: true,
   },
-
   likes: {
     type: [
       {
@@ -42,7 +39,6 @@ const clothingItemSchema = new Schema({
     ],
     default: [],
   },
-
   createdAt: {
     type: Date,
     default: Date.now,

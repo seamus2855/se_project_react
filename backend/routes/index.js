@@ -1,26 +1,29 @@
 const router = require("express").Router();
-const auth = require("../middlewares/auth");
 const usersRouter = require("./users");
-const clothingItemsRouter = require("./clothingItems"); // FIX: Corrected import name to match clothingItems.js file name
-
-// Controllers for public handlers
+const clothingItemsRouter = require("./clothingItems");
 const { login, createUser } = require("../controllers/users");
-const { getAll } = require("../controllers/clothingItems"); // FIX: Matches your main item fetching method name
+const { validateUserBody, validateAuthentication } = require("../middlewares/validation"); // Added Joi validation imports
+const { NOT_FOUND } = require("../utils/errors");
 
 // ==========================================
-// 1. PUBLIC ENDPOINTS (No token required)
+// 1. PUBLIC AUTHENTICATION ENDPOINTS
 // ==========================================
-router.post("/signin", login);
-router.post("/signup", createUser);
-
-// FIX: Mount the public GET /items route BEFORE auth middleware 
-// This resolves the 401 Unauthorized crash on application page load
-router.get("/items", getAll);
+// Secured with automated Celebrate body validation checks
+router.post("/signin", validateAuthentication, login);
+router.post("/signup", validateUserBody, createUser);
 
 // ==========================================
-// 2. PROTECTED ENDPOINTS (Requires valid token)
+// 2. RESOURCE ROUTING MOUNTS
 // ==========================================
-router.use("/users", auth, usersRouter);
-router.use("/items", auth, clothingItemsRouter); // Handles protected operations like POST/DELETE/LIKE
+// Passes routing down to sub-routers which handle their own public vs. private endpoints cleanly
+router.use("/items", clothingItemsRouter);
+router.use("/users", usersRouter); // Fixed: Removed duplicate global 'auth' middleware layer
+
+// ==========================================
+// 3. CATCH-ALL WILD CARD 404
+// ==========================================
+router.use((req, res) => {
+  return res.status(NOT_FOUND).json({ message: "Requested resource not found" });
+});
 
 module.exports = router;

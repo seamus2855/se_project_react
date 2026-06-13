@@ -19,12 +19,14 @@ exports.createUser = async (req, res) => {
         .status(BAD_REQUEST)
         .json({ message: "Email and password are required" });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       email,
       password: hashedPassword,
       ...rest,
     });
+
     const userObj = newUser.toObject();
     delete userObj.password;
     return res.status(201).json(userObj);
@@ -45,7 +47,6 @@ exports.createUser = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // Validate required fields
     if (!email || !password) {
       return res
         .status(BAD_REQUEST)
@@ -55,8 +56,6 @@ exports.login = async (req, res) => {
     const user = await User.findUserByCredentials(email, password);
     const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: "7d" });
 
-    // FIX: Send the user details (name, avatar, email) alongside the token
-    // This allows React to instantly render the profile and avatar
     return res.status(200).json({
       token,
       user: {
@@ -67,7 +66,8 @@ exports.login = async (req, res) => {
       },
     });
   } catch (err) {
-    if (err.message === "Incorrect email or password") {
+    // Standardizes check against typical auth static errors
+    if (err.message === "Incorrect email or password" || err.name === "AuthenticationError") {
       return res
         .status(UNAUTHORIZED)
         .json({ message: "Incorrect email or password" });
@@ -87,6 +87,9 @@ exports.getCurrentUser = async (req, res) => {
     }
     return res.json(user);
   } catch (err) {
+    if (err.name === "CastError") {
+      return res.status(BAD_REQUEST).json({ message: "Invalid ID format" });
+    }
     return res
       .status(INTERNAL_SERVER_ERROR)
       .json({ message: "An error has occurred on the server." });
@@ -97,7 +100,6 @@ exports.getCurrentUser = async (req, res) => {
 exports.updateCurrentUser = async (req, res) => {
   try {
     const { name, avatar } = req.body;
-    // FIX: { new: true } guarantees Mongoose returns the NEW, updated data
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       { name, avatar },

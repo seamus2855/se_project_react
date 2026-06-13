@@ -1,6 +1,6 @@
 // middleware/auth.js
 const jwt = require("jsonwebtoken");
-const { UnauthorizedError } = require("../errors/UnauthorizedError"); // Load custom error class
+const { UNAUTHORIZED } = require("../utils/errors"); // Aligned with your project's error structure
 const { JWT_SECRET } = require("../utils/config");
 
 module.exports = (req, res, next) => {
@@ -8,7 +8,9 @@ module.exports = (req, res, next) => {
 
   // 1. Verify token presence and structure
   if (!authorization || !authorization.startsWith("Bearer ")) {
-    return next(new UnauthorizedError("Authorization required"));
+    return res
+      .status(UNAUTHORIZED)
+      .json({ message: "Authorization required" });
   }
 
   const token = authorization.replace("Bearer ", "");
@@ -19,7 +21,9 @@ module.exports = (req, res, next) => {
     req.user = payload;
     return next();
   } catch (err) {
-    // 3. Delegate to central pipeline so Winston logs it and errorHandler catches it
-    return next(new UnauthorizedError("Authorization required"));
+    // 3. Handle invalid token
+    return res
+      .status(UNAUTHORIZED)
+      .json({ message: "Authorization required" });
   }
 };
