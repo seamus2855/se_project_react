@@ -1,0 +1,85 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header__logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header__logo {
+  width: 173px;
+  height: 30px;
+}
+
+.header__date-location {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__user-section,
+.header__auth-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__add-btn,
+.header__auth-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  color: #000;
+}
+
+.header__auth-btn {
+  color: #0049ff; /* Specific blue for Log In/Sign Up links */
+}
+
+.header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header__user-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header__avatar,
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header__avatar-placeholder {
+  background-color: #0049ff; /* Background for placeholder */
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 18px;
+}

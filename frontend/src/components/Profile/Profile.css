@@ -1,0 +1,44 @@
+.profile { 
+  display: flex; 
+  flex-direction: row; 
+  gap: 40px; /* Increased gap for a cleaner look */ 
+  padding: 20px; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+} 
+
+.profile__sidebar { 
+  display: flex; 
+  flex-direction: column; /* Stack avatar and name vertically in the sidebar */ 
+  align-items: flex-start; 
+  min-width: 200px; /* Prevents the sidebar from collapsing too much */ 
+} 
+
+.profile__avatar { 
+  width: 80px; 
+  height: 80px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+  margin-bottom: 12px; /* Space below the avatar */ 
+} 
+
+.profile__name { 
+  font-size: 18px; /* Adjust font size to match design hierarchy */ 
+  font-weight: 700; 
+  margin: 0; 
+} 
+
+/* FIXED CONTAINER: Matches the structured layout of the Home page */
+.profile__items { 
+  flex-grow: 1; /* Take up remaining space next to sidebar */ 
+  display: grid; 
+  
+  /* 1. Changed minmax to 328px to match your strict item-card width exactly */
+  grid-template-columns: repeat(auto-fill, minmax(328px, 1fr)); 
+  
+  /* 2. Increased gap to create proportional vertical and horizontal grid spacing */
+  gap: 24px; 
+  
+  /* 3. Ensures the grid items align nicely to the top left of the main panel */
+  align-content: start;
+} 
