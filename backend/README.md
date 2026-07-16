@@ -4,8 +4,8 @@ This repository contains the back-end server for the WTWR application. The proje
 
 ## 🚀 Live Applications
 
-* **Frontend Application:** [View Live Deployment](https://vercel.app)
-* **Backend API Gateway:** [View Live API](https://onrender.com)
+* **Frontend Application:** [View Live Deployment]
+* **Backend API Gateway:** [View Live API]
 
 ## 💻 Local Setup & Repositories
 
