@@ -4,8 +4,8 @@ This repository contains the back-end server for the WTWR application. The proje
 
 ## 🚀 Live Applications
 
-* **Frontend Application:** [View Live Deployment]
-* **Backend API Gateway:** [View Live API]
+* **Frontend Application:** [View Lhttps://console.cloud.google.com/compute/instances?facet_url=https:%2F%2Fcloud.google.com%2Ffree&project=project-74e34639-f588-4cc3-9dbive Deployment]
+* **Backend API Gateway:** [\[View Live API\]](https://console.cloud.google.com/compute/instances?facet_url=https:%2F%2Fcloud.google.com%2Ffree&project=project-74e34639-f588-4cc3-9db)
 
 ## 💻 Local Setup & Repositories
 
